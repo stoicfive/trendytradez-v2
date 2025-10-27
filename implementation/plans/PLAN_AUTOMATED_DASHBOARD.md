@@ -21,6 +21,7 @@ Build a fully automated project management dashboard that watches codebase chang
 **Goal**: Detect all file changes in codebase
 
 **Tasks**:
+
 - Install chokidar for file watching
 - Watch `packages/*/`, `apps/*/`, `*.md`, `package.json` files
 - Debounce changes (500ms) to avoid excessive updates
@@ -28,6 +29,7 @@ Build a fully automated project management dashboard that watches codebase chang
 - Ignore `node_modules/`, `dist/`, `.git/`
 
 **Deliverables**:
+
 - `scripts/watcher.js` - File system watcher
 - Logs showing detected changes
 
@@ -36,6 +38,7 @@ Build a fully automated project management dashboard that watches codebase chang
 **Goal**: Extract project data from codebase automatically
 
 **Tasks**:
+
 - Parse `package.json` files to detect packages and their status
 - Analyze test files to calculate coverage
 - Parse git commits to track progress
@@ -44,6 +47,7 @@ Build a fully automated project management dashboard that watches codebase chang
 - Detect new files, modified files, deleted files
 
 **Deliverables**:
+
 - `scripts/analyzer.js` - Code analysis engine
 - Functions: `analyzePackages()`, `analyzeTests()`, `analyzeCommits()`
 
@@ -52,6 +56,7 @@ Build a fully automated project management dashboard that watches codebase chang
 **Goal**: Single source of truth derived from codebase
 
 **Tasks**:
+
 - Create state schema matching dashboard needs
 - Auto-generate epics from implementation plans
 - Auto-generate stories from package.json files
@@ -61,6 +66,7 @@ Build a fully automated project management dashboard that watches codebase chang
 - Store state in SQLite for persistence
 
 **Deliverables**:
+
 - `scripts/state-manager.js` - State management
 - `dashboard.db` - SQLite database
 
@@ -69,6 +75,7 @@ Build a fully automated project management dashboard that watches codebase chang
 **Goal**: Push updates to dashboard instantly
 
 **Tasks**:
+
 - Create Express server with WebSocket support
 - Integrate file watcher with state manager
 - Broadcast state changes to connected clients
@@ -77,6 +84,7 @@ Build a fully automated project management dashboard that watches codebase chang
 - Add health check endpoint
 
 **Deliverables**:
+
 - `scripts/server.js` - WebSocket server
 - API endpoints: `/api/status`, `/api/packages`, `/api/commits`
 
@@ -85,6 +93,7 @@ Build a fully automated project management dashboard that watches codebase chang
 **Goal**: Dynamic UI that updates automatically
 
 **Tasks**:
+
 - Migrate from static HTML to React
 - Use WebSocket client for real-time updates
 - Implement Epic/Story/Subtask components
@@ -94,6 +103,7 @@ Build a fully automated project management dashboard that watches codebase chang
 - Make fully responsive
 
 **Deliverables**:
+
 - `dashboard-app/` - React application
 - Components: `Epic`, `Story`, `Subtask`, `StatusCard`
 
@@ -102,6 +112,7 @@ Build a fully automated project management dashboard that watches codebase chang
 **Goal**: Smart insights and predictions
 
 **Tasks**:
+
 - Detect when packages are "done" (tests pass, no TODOs)
 - Predict completion dates based on velocity
 - Suggest next tasks based on dependencies
@@ -109,6 +120,7 @@ Build a fully automated project management dashboard that watches codebase chang
 - Detect breaking changes
 
 **Deliverables**:
+
 - `scripts/intelligence.js` - Smart analysis
 - Dashboard insights section
 
