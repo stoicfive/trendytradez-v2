@@ -275,13 +275,12 @@ nav a.active {
 }
 
 .epic-content {
-    max-height: 5000px;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 .epic.collapsed .epic-content {
-    max-height: 0;
+    display: none;
 }
 
 .epic-progress {
@@ -334,13 +333,12 @@ nav a.active {
 }
 
 .story-subtasks {
-    max-height: 5000px;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 .story.collapsed .story-subtasks {
-    max-height: 0;
+    display: none;
 }
 
 /* Subtask Styles - Enhanced */
