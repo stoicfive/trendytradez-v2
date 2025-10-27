@@ -29,7 +29,7 @@ export interface ThemePalette {
 
 export interface Theme {
   palette: ThemePalette;
-  spacing: (factor: number) => number;
+  spacing: (factor: number) => string;
   borderRadius: number;
   shadows: string[];
   typography: {

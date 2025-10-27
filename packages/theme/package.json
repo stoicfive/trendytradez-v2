@@ -1,0 +1,33 @@
+{
+  "name": "@trendytradez/theme",
+  "version": "0.1.0",
+  "description": "Theme system for TrendyTradez",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "@trendytradez/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.0.0",
+    "@testing-library/react": "^14.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}
