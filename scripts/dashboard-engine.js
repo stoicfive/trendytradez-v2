@@ -7,6 +7,7 @@
 const { startWatcher } = require('./watcher');
 const { analyzeProject } = require('./analyzer');
 const { updateState, getState } = require('./state-manager');
+const { broadcastUpdate } = require('./server');
 
 let isAnalyzing = false;
 
@@ -30,7 +31,9 @@ async function runAnalysis() {
     
     console.log('✅ Dashboard updated\n');
     
-    // TODO: Broadcast to WebSocket clients
+    // Broadcast to WebSocket clients
+    const state = getState();
+    broadcastUpdate(state);
     
   } catch (error) {
     console.error('❌ Analysis failed:', error);

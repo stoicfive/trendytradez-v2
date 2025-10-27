@@ -18,6 +18,8 @@
     "dashboard:analyze": "node scripts/analyzer.js",
     "dashboard:state": "node scripts/state-manager.js state",
     "dashboard:engine": "node scripts/dashboard-engine.js",
+    "dashboard:server": "node scripts/server.js",
+    "dashboard:start": "node scripts/start-all.js",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -26,6 +28,8 @@
     "ajv-formats": "^3.0.1",
     "better-sqlite3": "^12.4.1",
     "chokidar": "^4.0.3",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "glob": "^11.0.3",
     "happy-dom": "^20.0.8",
     "husky": "^9.1.7",
@@ -34,7 +38,8 @@
     "live-server": "^1.2.2",
     "prettier": "^3.1.0",
     "turbo": "^2.0.0",
-    "typescript": "^5.8.0"
+    "typescript": "^5.8.0",
+    "ws": "^8.18.3"
   },
   "engines": {
     "node": ">=20.0.0",
