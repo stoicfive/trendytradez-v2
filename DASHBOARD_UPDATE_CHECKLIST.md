@@ -22,6 +22,8 @@ Use this checklist every time you complete an implementation to ensure the proje
 - [ ] Update "Packages Created" stat (e.g., "2/9" → "3/9")
 - [ ] Update progress bar percentage
 - [ ] Update "Current Status" section in Overview
+- [ ] Update package description if it changed (e.g., "Shared UI" → "Tailwind + Tremor")
+- [ ] Mark corresponding sub-task as complete in Implementation Plans
 
 ## After Completing an Epic
 
@@ -42,7 +44,15 @@ Use this checklist every time you complete an implementation to ensure the proje
 - [ ] Update "Next Actions" section with current and upcoming tasks
 - [ ] Add any blockers to "Blockers & Notes" section
 - [ ] Update implementation summaries in `/implementation/summaries/`
+- [ ] Update "Current Status" descriptions to reflect latest work
 - [ ] Commit dashboard changes with descriptive message
+
+## After Adding New Technology/Framework
+
+- [ ] Update relevant package descriptions to mention the technology
+- [ ] Update "Current Status" to highlight the new addition
+- [ ] Add to "Next Actions" if it requires follow-up work (e.g., refactoring)
+- [ ] Create memory for the new technology/framework decision
 
 ## Quick Reference: What to Update Where
 
