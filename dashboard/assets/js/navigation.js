@@ -57,7 +57,7 @@ function initCollapsible() {
 /**
  * Expand all epics and stories
  */
-function expandAll() {
+window.expandAll = function() {
     document.querySelectorAll('.epic, .story').forEach(el => {
         el.classList.remove('collapsed');
     });
@@ -66,7 +66,7 @@ function expandAll() {
 /**
  * Collapse all epics and stories
  */
-function collapseAll() {
+window.collapseAll = function() {
     document.querySelectorAll('.epic, .story').forEach(el => {
         el.classList.add('collapsed');
     });

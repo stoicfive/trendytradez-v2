@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrendyTradez v2 - Project Dashboard</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+</head>
+<body>
+    <!-- Remove duplicate inline styles - using external CSS -->
+    <!--<style>
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -474,9 +472,7 @@
             height: 100%;
             transition: width 0.3s;
         }
-    </style>
-</head>
-<body>
+    </style>-->
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
@@ -573,9 +569,6 @@
             <span class="status in-progress">In Progress</span>
         </header>
 
-        <nav>
-            <a href="#" class="nav-link active" data-section="overview">Overview</a>
-            <a href="#" class="nav-link" data-section="plans">Implementation Plans</a>
         <!-- Overview Section -->
         <div id="overview" class="content active">
             <div class="stats">
@@ -1213,53 +1206,10 @@
     </div>
     </div>
 
-    <script>
-        // Navigation
-        const navLinks = document.querySelectorAll('.nav-link');
-        const contents = document.querySelectorAll('.content');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Remove active class from all
-                navLinks.forEach(l => l.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked
-                link.classList.add('active');
-                const section = link.dataset.section;
-                document.getElementById(section).classList.add('active');
-            });
-        });
-
-        // Collapsible Epics
-        document.querySelectorAll('.epic-header').forEach(header => {
-            header.addEventListener('click', () => {
-                header.parentElement.classList.toggle('collapsed');
-            });
-        });
-
-        // Collapsible Stories
-        document.querySelectorAll('.story-header').forEach(header => {
-            header.addEventListener('click', () => {
-                header.parentElement.classList.toggle('collapsed');
-            });
-        });
-
-        // Expand/Collapse All
-        function expandAll() {
-            document.querySelectorAll('.epic, .story').forEach(el => {
-                el.classList.remove('collapsed');
-            });
-        }
-
-        function collapseAll() {
-            document.querySelectorAll('.epic, .story').forEach(el => {
-                el.classList.add('collapsed');
-            });
-        }
-    </script>
+    <!-- Remove duplicate inline scripts - using external JS -->
+    <!--<script>
+        // Duplicate code removed - see assets/js/navigation.js
+    </script>-->
     <script src="assets/js/navigation.js"></script>
     <script src="assets/js/icons.js"></script>
 </body>
