@@ -15,9 +15,6 @@ async function loadDashboardData() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         dashboardData = await response.json();
-        window.dispatchEvent(new CustomEvent('dashboardDataLoaded', { 
-            detail: dashboardData 
-        }));
         return dashboardData;
     } catch (error) {
         console.error('Error loading dashboard data:', error);
