@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* TrendyTradez custom styles */
+@layer base {
+  :root {
+    --background: 13 17 23;
+    --foreground: 230 237 243;
+  }
+
+  body {
+    @apply bg-gray-950 text-gray-100;
+  }
+}
+
+@layer components {
+  .widget-container {
+    @apply rounded-lg border border-gray-800 bg-gray-900 shadow-lg;
+  }
+
+  .widget-header {
+    @apply border-b border-gray-800 bg-gray-950 px-4 py-3;
+  }
+
+  .widget-content {
+    @apply p-4;
+  }
+}
