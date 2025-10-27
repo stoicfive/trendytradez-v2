@@ -93,14 +93,45 @@ if (options.story && options.status) {
   console.log(`   Or update the JSON data structure to include story tracking`);
 }
 
+if (options.initiative && options.status) {
+  // Initiative completion
+  const initiative = data.initiatives?.find(i => i.id === options.initiative);
+  if (initiative) {
+    initiative.status = options.status;
+    const completeInitiatives = data.initiatives.filter(i => i.status === 'complete').length;
+    data.stats.initiativesComplete.current = completeInitiatives;
+    data.stats.initiativesComplete.percentage = Math.round((completeInitiatives / data.stats.initiativesComplete.total) * 100);
+    console.log(`✅ Initiative ${initiative.name} marked as ${options.status}`);
+  }
+}
+
 if (options.epic && options.status) {
-  // Epic completion - update plans complete
-  const epicNum = parseInt(options.epic);
-  if (epicNum && options.status === 'complete') {
-    data.stats.plansComplete.current = Math.max(data.stats.plansComplete.current, epicNum);
-    data.stats.plansComplete.percentage = Math.round((data.stats.plansComplete.current / data.stats.plansComplete.total) * 100);
-    console.log(`✅ EPIC ${epicNum} marked as complete`);
-    console.log(`   Plans complete: ${data.stats.plansComplete.current}/${data.stats.plansComplete.total}`);
+  // Epic completion - find and update in initiatives
+  const epicId = options.epic.startsWith('epic-') ? options.epic : `epic-${options.epic}`;
+  let found = false;
+  
+  data.initiatives?.forEach(initiative => {
+    const epic = initiative.epics.find(e => e.id === epicId);
+    if (epic) {
+      epic.status = options.status;
+      found = true;
+      console.log(`✅ Epic ${epic.name} in ${initiative.name} marked as ${options.status}`);
+      
+      // Update epic stats
+      let totalEpics = 0;
+      let completeEpics = 0;
+      data.initiatives.forEach(init => {
+        totalEpics += init.epics.length;
+        completeEpics += init.epics.filter(e => e.status === 'complete').length;
+      });
+      data.stats.epicsComplete.current = completeEpics;
+      data.stats.epicsComplete.total = totalEpics;
+      data.stats.epicsComplete.percentage = Math.round((completeEpics / totalEpics) * 100);
+    }
+  });
+  
+  if (!found) {
+    console.log(`⚠️  Epic ${epicId} not found in initiatives`);
   }
 }
 

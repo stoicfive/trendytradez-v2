@@ -20,9 +20,18 @@
     },
     "stats": {
       "type": "object",
-      "required": ["plansComplete", "packagesCreated", "currentPhase"],
+      "required": ["packagesCreated", "currentPhase"],
       "properties": {
-        "plansComplete": {
+        "initiativesComplete": {
+          "type": "object",
+          "required": ["current", "total", "percentage"],
+          "properties": {
+            "current": { "type": "integer", "minimum": 0 },
+            "total": { "type": "integer", "minimum": 1 },
+            "percentage": { "type": "integer", "minimum": 0, "maximum": 100 }
+          }
+        },
+        "epicsComplete": {
           "type": "object",
           "required": ["current", "total", "percentage"],
           "properties": {
@@ -42,6 +51,49 @@
         },
         "currentPhase": { "type": "string" },
         "weeksTotal": { "type": "string" }
+      }
+    },
+    "initiatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "status", "epics"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "status": { "type": "string", "enum": ["complete", "in-progress", "pending"] },
+          "startDate": { "type": ["string", "null"] },
+          "epics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "name", "description", "status", "stories"],
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "description": { "type": "string" },
+                "status": { "type": "string", "enum": ["complete", "in-progress", "pending"] },
+                "stories": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["id", "name", "status", "subtasks"],
+                    "properties": {
+                      "id": { "type": "string" },
+                      "name": { "type": "string" },
+                      "status": { "type": "string", "enum": ["complete", "in-progress", "pending"] },
+                      "subtasks": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "packages": {

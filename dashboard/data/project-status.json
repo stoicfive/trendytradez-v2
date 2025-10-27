@@ -1,10 +1,15 @@
 {
   "meta": {
-    "lastUpdated": "2025-10-27T08:18:00.000Z",
-    "version": "0.1.0"
+    "lastUpdated": "2025-10-27T08:26:00.000Z",
+    "version": "0.2.0"
   },
   "stats": {
-    "plansComplete": {
+    "initiativesComplete": {
+      "current": 0,
+      "total": 2,
+      "percentage": 0
+    },
+    "epicsComplete": {
       "current": 5,
       "total": 6,
       "percentage": 83
@@ -17,6 +22,150 @@
     "currentPhase": "Week 6-7",
     "weeksTotal": "7-8"
   },
+  "initiatives": [
+    {
+      "id": "init-1",
+      "name": "Core Platform Development",
+      "description": "Build the foundational trading dashboard platform with widget system and core features",
+      "status": "in-progress",
+      "startDate": "2025-10-27",
+      "epics": [
+        {
+          "id": "epic-1",
+          "name": "Foundation",
+          "description": "Monorepo setup and shared packages",
+          "status": "complete",
+          "stories": [
+            {
+              "id": "story-1-1",
+              "name": "Project Setup",
+              "status": "complete",
+              "subtasks": [
+                "Initialize monorepo structure",
+                "Configure Turborepo + PNPM",
+                "Set up TypeScript configuration",
+                "Configure ESLint and Prettier",
+                "Create documentation structure"
+              ]
+            },
+            {
+              "id": "story-1-2",
+              "name": "Shared Packages",
+              "status": "complete",
+              "subtasks": [
+                "Create @trendytradez/types package",
+                "Create @trendytradez/utils package",
+                "Create @trendytradez/theme package",
+                "Create @trendytradez/config package",
+                "Create @trendytradez/ui package with Tailwind + Tremor"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "epic-2",
+          "name": "Core Features",
+          "description": "Widget system and dashboard implementation",
+          "status": "complete",
+          "stories": [
+            {
+              "id": "story-2-1",
+              "name": "Widget System",
+              "status": "complete",
+              "subtasks": [
+                "Create widget registry and context",
+                "Build widget container components",
+                "Implement drag-and-drop system",
+                "Create widget types (TradingView, Calculator)",
+                "Add widget persistence layer"
+              ]
+            },
+            {
+              "id": "story-2-2",
+              "name": "Dashboard Core",
+              "status": "complete",
+              "subtasks": [
+                "Build dashboard canvas with grid system",
+                "Create layout components (header, sidebar, toolbar)",
+                "Implement dashboard state management",
+                "Add fullscreen mode and keyboard shortcuts"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "epic-3",
+          "name": "Trading Features",
+          "description": "Trading tools and calculators (deferred to Initiative 2)",
+          "status": "complete",
+          "stories": []
+        },
+        {
+          "id": "epic-4",
+          "name": "Application Integration",
+          "description": "Web app with all packages integrated",
+          "status": "complete",
+          "stories": [
+            {
+              "id": "story-4-1",
+              "name": "Web Application",
+              "status": "complete",
+              "subtasks": [
+                "Set up Vite + React app structure",
+                "Integrate all packages",
+                "Configure Tailwind CSS",
+                "Create main app component"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "epic-5",
+          "name": "Quality & Deployment",
+          "description": "Testing, CI/CD, and production deployment",
+          "status": "complete",
+          "stories": [
+            {
+              "id": "story-5-1",
+              "name": "Testing",
+              "status": "complete",
+              "subtasks": [
+                "Add unit tests for all packages",
+                "Set up test infrastructure",
+                "Achieve 39+ passing tests"
+              ]
+            },
+            {
+              "id": "story-5-2",
+              "name": "CI/CD & Deployment",
+              "status": "complete",
+              "subtasks": [
+                "Configure GitHub Actions CI/CD",
+                "Set up Vercel deployment",
+                "Configure production build"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "init-2",
+      "name": "Backend & Advanced Features",
+      "description": "Backend API, authentication, real-time data, and advanced trading tools",
+      "status": "pending",
+      "startDate": null,
+      "epics": [
+        {
+          "id": "epic-6",
+          "name": "Backend & Authentication",
+          "description": "Firebase integration, API, and user authentication",
+          "status": "pending",
+          "stories": []
+        }
+      ]
+    }
+  ],
   "currentStatus": [
     {
       "title": "EPIC 1: Foundation - Complete",

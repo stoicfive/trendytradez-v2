@@ -33,9 +33,18 @@ try {
   const errors = [];
 
   // Check percentages match calculations
-  const plansPercentage = Math.round((data.stats.plansComplete.current / data.stats.plansComplete.total) * 100);
-  if (plansPercentage !== data.stats.plansComplete.percentage) {
-    errors.push(`Plans percentage mismatch: expected ${plansPercentage}, got ${data.stats.plansComplete.percentage}`);
+  if (data.stats.initiativesComplete) {
+    const initPercentage = Math.round((data.stats.initiativesComplete.current / data.stats.initiativesComplete.total) * 100);
+    if (initPercentage !== data.stats.initiativesComplete.percentage) {
+      errors.push(`Initiatives percentage mismatch: expected ${initPercentage}, got ${data.stats.initiativesComplete.percentage}`);
+    }
+  }
+
+  if (data.stats.epicsComplete) {
+    const epicsPercentage = Math.round((data.stats.epicsComplete.current / data.stats.epicsComplete.total) * 100);
+    if (epicsPercentage !== data.stats.epicsComplete.percentage) {
+      errors.push(`Epics percentage mismatch: expected ${epicsPercentage}, got ${data.stats.epicsComplete.percentage}`);
+    }
   }
 
   const packagesPercentage = Math.round((data.stats.packagesCreated.current / data.stats.packagesCreated.total) * 100);
