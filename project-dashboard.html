@@ -78,6 +78,87 @@
             color: white;
         }
 
+        .epic {
+            margin-bottom: 35px;
+            border-left: 4px solid #58a6ff;
+            padding-left: 20px;
+        }
+
+        .epic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .epic-title {
+            color: #58a6ff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .epic-progress {
+            font-size: 14px;
+            color: #8b949e;
+        }
+
+        .story {
+            background: #0d1117;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #7ee787;
+        }
+
+        .story.in-progress {
+            border-left-color: #1f6feb;
+        }
+
+        .story.pending {
+            border-left-color: #6e7681;
+        }
+
+        .story-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .story-title {
+            font-weight: 600;
+            color: #e6edf3;
+            font-size: 16px;
+        }
+
+        .subtask {
+            background: #161b22;
+            padding: 10px 12px;
+            margin: 8px 0 8px 20px;
+            border-radius: 4px;
+            border-left: 2px solid #30363d;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .subtask.complete {
+            border-left-color: #3fb950;
+            opacity: 0.7;
+        }
+
+        .subtask-name {
+            color: #c9d1d9;
+        }
+
+        .subtask-badge {
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
         .section {
             background: #161b22;
             padding: 25px;
@@ -354,81 +435,257 @@
         <!-- Plans Section -->
         <div id="plans" class="content">
             <div class="section">
-                <h2>Implementation Plans</h2>
+                <h2>Implementation Roadmap</h2>
                 
-                <div class="phase">
-                    <h3>Phase 1: Foundation (Week 1-2)</h3>
-                    <div class="plan-item complete">
-                        <div>
-                            <div class="plan-name">PLAN_00: Project Setup</div>
-                            <div class="plan-desc">Monorepo setup with Turborepo + PNPM</div>
-                        </div>
-                        <span class="badge complete">Complete</span>
+                <!-- EPIC 1: Foundation -->
+                <div class="epic">
+                    <div class="epic-header">
+                        <div class="epic-title">EPIC 1: Foundation</div>
+                        <div class="epic-progress">Week 1-2 • 2/2 Stories Complete</div>
                     </div>
-                    <div class="plan-item in-progress">
-                        <div>
-                            <div class="plan-name">PLAN_01: Shared Packages</div>
-                            <div class="plan-desc">Core packages (types, utils, UI, theme, config)</div>
+
+                    <!-- Story 1.1: Project Setup -->
+                    <div class="story">
+                        <div class="story-header">
+                            <div class="story-title">Story 1.1: Project Setup</div>
+                            <span class="badge complete">Complete</span>
                         </div>
-                        <span class="badge in-progress">In Progress</span>
+                        <div class="subtask complete">
+                            <div class="subtask-name">Initialize monorepo structure</div>
+                            <span class="subtask-badge complete">Done</span>
+                        </div>
+                        <div class="subtask complete">
+                            <div class="subtask-name">Configure Turborepo + PNPM</div>
+                            <span class="subtask-badge complete">Done</span>
+                        </div>
+                        <div class="subtask complete">
+                            <div class="subtask-name">Set up TypeScript configuration</div>
+                            <span class="subtask-badge complete">Done</span>
+                        </div>
+                        <div class="subtask complete">
+                            <div class="subtask-name">Configure ESLint and Prettier</div>
+                            <span class="subtask-badge complete">Done</span>
+                        </div>
+                        <div class="subtask complete">
+                            <div class="subtask-name">Create documentation structure</div>
+                            <span class="subtask-badge complete">Done</span>
+                        </div>
+                    </div>
+
+                    <!-- Story 1.2: Shared Packages -->
+                    <div class="story in-progress">
+                        <div class="story-header">
+                            <div class="story-title">Story 1.2: Shared Packages</div>
+                            <span class="badge in-progress">In Progress</span>
+                        </div>
+                        <div class="subtask complete">
+                            <div class="subtask-name">Create @trendytradez/types package</div>
+                            <span class="subtask-badge complete">Done</span>
+                        </div>
+                        <div class="subtask complete">
+                            <div class="subtask-name">Create @trendytradez/utils package</div>
+                            <span class="subtask-badge complete">Done</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Create @trendytradez/ui package</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Create @trendytradez/theme package</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Create @trendytradez/config package</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="phase">
-                    <h3>Phase 2: Core Features (Week 2-4)</h3>
-                    <div class="plan-item pending">
-                        <div>
-                            <div class="plan-name">PLAN_02: Widget System</div>
-                            <div class="plan-desc">Widget architecture with drag-and-drop</div>
-                        </div>
-                        <span class="badge pending">Pending</span>
+                <!-- EPIC 2: Core Features -->
+                <div class="epic">
+                    <div class="epic-header">
+                        <div class="epic-title">EPIC 2: Core Features</div>
+                        <div class="epic-progress">Week 2-4 • 0/2 Stories Complete</div>
                     </div>
-                    <div class="plan-item pending">
-                        <div>
-                            <div class="plan-name">PLAN_03: Dashboard Core</div>
-                            <div class="plan-desc">Dashboard implementation with canvas and layout</div>
+
+                    <!-- Story 2.1: Widget System -->
+                    <div class="story pending">
+                        <div class="story-header">
+                            <div class="story-title">Story 2.1: Widget System</div>
+                            <span class="badge pending">Pending</span>
                         </div>
-                        <span class="badge pending">Pending</span>
+                        <div class="subtask">
+                            <div class="subtask-name">Create widget registry and context</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Build widget container components</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Implement drag-and-drop system</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Create widget types (TradingView, Calculator, etc.)</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Add widget persistence layer</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                    </div>
+
+                    <!-- Story 2.2: Dashboard Core -->
+                    <div class="story pending">
+                        <div class="story-header">
+                            <div class="story-title">Story 2.2: Dashboard Core</div>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Build dashboard canvas with grid system</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Create layout components (header, sidebar, toolbar)</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Implement dashboard state management</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Add fullscreen mode and keyboard shortcuts</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="phase">
-                    <h3>Phase 3: Features (Week 4-5)</h3>
-                    <div class="plan-item pending">
-                        <div>
-                            <div class="plan-name">PLAN_04: Trading Tools</div>
-                            <div class="plan-desc">Trading calculators and analysis tools</div>
+                <!-- EPIC 3: Trading Features -->
+                <div class="epic">
+                    <div class="epic-header">
+                        <div class="epic-title">EPIC 3: Trading Features</div>
+                        <div class="epic-progress">Week 4-5 • 0/1 Stories Complete</div>
+                    </div>
+
+                    <!-- Story 3.1: Trading Tools -->
+                    <div class="story pending">
+                        <div class="story-header">
+                            <div class="story-title">Story 3.1: Trading Tools</div>
+                            <span class="badge pending">Pending</span>
                         </div>
-                        <span class="badge pending">Pending</span>
+                        <div class="subtask">
+                            <div class="subtask-name">Options P&L calculator</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Position sizing calculator</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Stop-loss calculator</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Crypto portfolio tracker</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Leverage calculator</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="phase">
-                    <h3>Phase 4: Integration (Week 5-6)</h3>
-                    <div class="plan-item pending">
-                        <div>
-                            <div class="plan-name">PLAN_05: Web Application</div>
-                            <div class="plan-desc">Main web app with routing and authentication</div>
+                <!-- EPIC 4: Application Integration -->
+                <div class="epic">
+                    <div class="epic-header">
+                        <div class="epic-title">EPIC 4: Application Integration</div>
+                        <div class="epic-progress">Week 5-6 • 0/1 Stories Complete</div>
+                    </div>
+
+                    <!-- Story 4.1: Web Application -->
+                    <div class="story pending">
+                        <div class="story-header">
+                            <div class="story-title">Story 4.1: Web Application</div>
+                            <span class="badge pending">Pending</span>
                         </div>
-                        <span class="badge pending">Pending</span>
+                        <div class="subtask">
+                            <div class="subtask-name">Set up Vite + React app</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Integrate all packages</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Implement routing (React Router)</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Add authentication (Firebase)</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Configure production build</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="phase">
-                    <h3>Phase 5: Quality & Deployment (Week 6-7)</h3>
-                    <div class="plan-item pending">
-                        <div>
-                            <div class="plan-name">PLAN_06: Testing & QA</div>
-                            <div class="plan-desc">Comprehensive testing strategy</div>
-                        </div>
-                        <span class="badge pending">Pending</span>
+                <!-- EPIC 5: Quality & Deployment -->
+                <div class="epic">
+                    <div class="epic-header">
+                        <div class="epic-title">EPIC 5: Quality & Deployment</div>
+                        <div class="epic-progress">Week 6-7 • 0/2 Stories Complete</div>
                     </div>
-                    <div class="plan-item pending">
-                        <div>
-                            <div class="plan-name">PLAN_07: Deployment</div>
-                            <div class="plan-desc">Production deployment and DevOps</div>
+
+                    <!-- Story 5.1: Testing & QA -->
+                    <div class="story pending">
+                        <div class="story-header">
+                            <div class="story-title">Story 5.1: Testing & QA</div>
+                            <span class="badge pending">Pending</span>
                         </div>
-                        <span class="badge pending">Pending</span>
+                        <div class="subtask">
+                            <div class="subtask-name">Achieve >80% unit test coverage</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Set up E2E testing with Playwright</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Add visual regression testing</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Configure CI/CD pipeline</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                    </div>
+
+                    <!-- Story 5.2: Deployment -->
+                    <div class="story pending">
+                        <div class="story-header">
+                            <div class="story-title">Story 5.2: Deployment & DevOps</div>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Configure production hosting (Vercel)</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Set up monitoring (Sentry)</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Add analytics (Plausible)</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <div class="subtask-name">Configure staging environment</div>
+                            <span class="subtask-badge pending">Pending</span>
+                        </div>
                     </div>
                 </div>
             </div>
