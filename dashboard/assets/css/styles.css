@@ -245,13 +245,33 @@ nav a.active {
 }
 
 .collapse-icon {
-    transition: transform 0.2s;
-    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
     font-size: 14px;
+    color: #8b949e;
+    background: rgba(139, 148, 158, 0.1);
+    border-radius: 4px;
 }
 
-.epic.collapsed .collapse-icon {
+.epic-header:hover .collapse-icon,
+.story-header:hover .collapse-icon {
+    background: rgba(88, 166, 255, 0.2);
+    color: #58a6ff;
+    transform: scale(1.1);
+}
+
+.epic.collapsed .collapse-icon,
+.story.collapsed .collapse-icon {
     transform: rotate(-90deg);
+}
+
+.epic.collapsed .epic-header:hover .collapse-icon,
+.story.collapsed .story-header:hover .collapse-icon {
+    transform: rotate(-90deg) scale(1.1);
 }
 
 .epic-content {
