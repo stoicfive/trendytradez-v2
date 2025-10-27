@@ -1,0 +1,8 @@
+echo "🔍 Running pre-commit checks..."
+
+# Validate dashboard data
+echo "📊 Validating dashboard data..."
+node scripts/validate-dashboard.js || exit 1
+
+echo "✅ Dashboard validation passed!"
+echo "Note: Run 'pnpm lint && pnpm type-check && pnpm test' manually before pushing"
