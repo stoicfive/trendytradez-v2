@@ -41,22 +41,26 @@ function initNavigation() {
  */
 function initCollapsible() {
     // Collapsible Epics
-    document.querySelectorAll('.epic-header').forEach(header => {
+    document.querySelectorAll('.epic-header').forEach((header, index) => {
         header.addEventListener('click', (e) => {
             e.stopPropagation();
+            e.preventDefault();
             const epic = header.closest('.epic');
             if (epic) {
+                console.log(`Toggling epic ${index + 1}`);
                 epic.classList.toggle('collapsed');
             }
         });
     });
 
     // Collapsible Stories
-    document.querySelectorAll('.story-header').forEach(header => {
+    document.querySelectorAll('.story-header').forEach((header, index) => {
         header.addEventListener('click', (e) => {
             e.stopPropagation();
+            e.preventDefault();
             const story = header.closest('.story');
             if (story) {
+                console.log(`Toggling story ${index + 1}`);
                 story.classList.toggle('collapsed');
             }
         });
