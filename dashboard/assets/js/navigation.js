@@ -42,15 +42,23 @@ function initNavigation() {
 function initCollapsible() {
     // Collapsible Epics
     document.querySelectorAll('.epic-header').forEach(header => {
-        header.addEventListener('click', () => {
-            header.parentElement.classList.toggle('collapsed');
+        header.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const epic = header.closest('.epic');
+            if (epic) {
+                epic.classList.toggle('collapsed');
+            }
         });
     });
 
     // Collapsible Stories
     document.querySelectorAll('.story-header').forEach(header => {
-        header.addEventListener('click', () => {
-            header.parentElement.classList.toggle('collapsed');
+        header.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const story = header.closest('.story');
+            if (story) {
+                story.classList.toggle('collapsed');
+            }
         });
     });
 }
