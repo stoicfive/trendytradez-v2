@@ -15,10 +15,10 @@ const DB_PATH = path.join(__dirname, '../dashboard.db');
  */
 function initializeDatabase() {
   const db = new Database(DB_PATH);
-  
+
   // Enable foreign keys
   db.pragma('foreign_keys = ON');
-  
+
   // Create tables
   db.exec(`
     CREATE TABLE IF NOT EXISTS project_meta (
@@ -89,7 +89,7 @@ function getDatabase() {
  */
 function updateState(analysis) {
   const db = getDatabase();
-  
+
   try {
     db.transaction(() => {
       // Update packages
@@ -102,13 +102,7 @@ function updateState(analysis) {
       `);
 
       for (const pkg of analysis.packages) {
-        insertPackage.run(
-          pkg.name,
-          pkg.description,
-          pkg.version,
-          pkg.path,
-          pkg.status
-        );
+        insertPackage.run(pkg.name, pkg.description, pkg.version, pkg.path, pkg.status);
       }
 
       // Update commits (keep last 20)
@@ -151,13 +145,7 @@ function updateState(analysis) {
       `);
 
       for (const plan of analysis.plans) {
-        insertPlan.run(
-          plan.name,
-          plan.file,
-          plan.progress,
-          plan.completed,
-          plan.total
-        );
+        insertPlan.run(plan.name, plan.file, plan.progress, plan.completed, plan.total);
       }
 
       // Update meta
@@ -176,7 +164,6 @@ function updateState(analysis) {
         INSERT INTO analysis_log (data) VALUES (?)
       `);
       insertLog.run(JSON.stringify(analysis));
-
     })();
 
     console.log('✅ State updated successfully');
@@ -193,7 +180,7 @@ function updateState(analysis) {
  */
 function getState() {
   const db = getDatabase();
-  
+
   try {
     const packages = db.prepare('SELECT * FROM packages ORDER BY name').all();
     const commits = db.prepare('SELECT * FROM commits ORDER BY created_at DESC LIMIT 10').all();
@@ -202,7 +189,7 @@ function getState() {
     const meta = db.prepare('SELECT * FROM project_meta').all();
 
     const metaObj = {};
-    meta.forEach(m => {
+    meta.forEach((m) => {
       metaObj[m.key] = m.value;
     });
 
@@ -239,7 +226,7 @@ function resetState() {
  */
 function getStats() {
   const db = getDatabase();
-  
+
   try {
     const packageCount = db.prepare('SELECT COUNT(*) as count FROM packages').get();
     const commitCount = db.prepare('SELECT COUNT(*) as count FROM commits').get();

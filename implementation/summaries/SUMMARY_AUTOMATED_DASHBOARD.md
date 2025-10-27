@@ -7,6 +7,7 @@ Fully automated project management system that watches codebase changes and upda
 ## Components Created
 
 ### Backend (Scripts)
+
 - **watcher.js** - File system watcher using chokidar
 - **analyzer.js** - Code analyzer extracting project data
 - **state-manager.js** - SQLite database manager
@@ -15,14 +16,17 @@ Fully automated project management system that watches codebase changes and upda
 - **start-all.js** - Convenience script to run everything
 
 ### Frontend (Dashboard App)
+
 - **React dashboard** - Real-time UI with WebSocket client
 - **useWebSocket hook** - Auto-reconnecting WebSocket client
 - **Responsive UI** - Dark theme, stats, packages, commits, plans
 
 ### Database
+
 - **dashboard.db** - SQLite database storing all project state
 
 ### Documentation
+
 - **AUTOMATED_DASHBOARD_GUIDE.md** - Complete system guide
 - **IMPLEMENTATION_STATUS.md** - Implementation tracking
 - **dashboard-app/README.md** - Dashboard UI documentation
@@ -57,16 +61,18 @@ pnpm dashboard:state      # View current state
 ## Files Created
 
 **Scripts (7 files)**:
+
 - scripts/watcher.js
 - scripts/analyzer.js
 - scripts/state-manager.js
 - scripts/server.js
 - scripts/dashboard-engine.js
 - scripts/start-all.js
-- scripts/__tests__/watcher.test.js
-- scripts/__tests__/analyzer.test.js
+- scripts/**tests**/watcher.test.js
+- scripts/**tests**/analyzer.test.js
 
 **Dashboard App (9 files)**:
+
 - dashboard-app/package.json
 - dashboard-app/vite.config.ts
 - dashboard-app/tsconfig.json
@@ -77,11 +83,13 @@ pnpm dashboard:state      # View current state
 - dashboard-app/README.md
 
 **Documentation (3 files)**:
+
 - AUTOMATED_DASHBOARD_GUIDE.md
 - IMPLEMENTATION_STATUS.md
 - dashboard-app/README.md
 
 **Database**:
+
 - dashboard.db (SQLite)
 
 ## Dependencies Added

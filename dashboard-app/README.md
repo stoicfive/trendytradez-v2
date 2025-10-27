@@ -39,6 +39,7 @@ pnpm dashboard:start
 ```
 
 This starts:
+
 - REST API on `http://localhost:3001`
 - WebSocket server on `ws://localhost:3002`
 
@@ -47,6 +48,7 @@ This starts:
 The dashboard connects to `ws://localhost:3002` by default.
 
 If the connection fails, ensure:
+
 1. Backend services are running (`pnpm dashboard:start`)
 2. No firewall blocking WebSocket connections
 3. Ports 3001 and 3002 are available
@@ -54,6 +56,7 @@ If the connection fails, ensure:
 ## Build Output
 
 Production build creates optimized bundle in `dist/`:
+
 - `dist/index.html` - Entry point
 - `dist/assets/` - JS and CSS bundles
 
@@ -98,7 +101,7 @@ The dashboard receives data in this format:
     totalPackages: number;
     completePackages: number;
     testCoverage: number;
-  };
+  }
 }
 ```
 
