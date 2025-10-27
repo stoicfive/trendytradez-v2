@@ -7,6 +7,7 @@ Fully automated project management system that watches your codebase and updates
 ## What It Does
 
 ### Automatic Tracking
+
 - **Watches all code changes** in real-time
 - **Analyzes packages** to determine completion status
 - **Tracks git commits** automatically
@@ -16,6 +17,7 @@ Fully automated project management system that watches your codebase and updates
 - **Broadcasts updates** to dashboard via WebSocket
 
 ### No Manual Updates Required
+
 - No CLI commands to run
 - No JSON files to edit
 - No dashboard updates needed
@@ -69,6 +71,7 @@ pnpm dashboard:start
 ```
 
 This starts:
+
 - File watcher monitoring code changes
 - Analysis engine processing updates
 - REST API on http://localhost:3001
@@ -149,6 +152,7 @@ npm run preview
 ### WebSocket (ws://localhost:3002)
 
 Connects and receives:
+
 - Initial state on connect
 - Real-time updates on code changes
 
@@ -196,16 +200,8 @@ Edit `scripts/watcher.js` to customize:
 ```javascript
 const config = {
   watch: {
-    paths: [
-      'packages/**/*.{ts,tsx,js,jsx,json}',
-      'apps/**/*.{ts,tsx,js,jsx,json}',
-      '*.md',
-    ],
-    ignore: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/.git/**',
-    ],
+    paths: ['packages/**/*.{ts,tsx,js,jsx,json}', 'apps/**/*.{ts,tsx,js,jsx,json}', '*.md'],
+    ignore: ['**/node_modules/**', '**/dist/**', '**/.git/**'],
     debounce: 500, // ms
   },
 };
@@ -216,6 +212,7 @@ const config = {
 ### Dashboard shows "Connecting..."
 
 **Solution**: Start backend services
+
 ```bash
 pnpm dashboard:start
 ```
@@ -223,6 +220,7 @@ pnpm dashboard:start
 ### No updates showing
 
 **Solution**: Check if engine is running and watching files
+
 ```bash
 # Should see "Watching for changes..."
 ```
@@ -230,6 +228,7 @@ pnpm dashboard:start
 ### Port already in use
 
 **Solution**: Kill existing processes
+
 ```bash
 lsof -ti:3001 | xargs kill -9  # API
 lsof -ti:3002 | xargs kill -9  # WebSocket
@@ -239,6 +238,7 @@ lsof -ti:3003 | xargs kill -9  # Dashboard
 ### Database errors
 
 **Solution**: Reset database
+
 ```bash
 node scripts/state-manager.js reset
 ```
