@@ -110,13 +110,19 @@ class GitHubService {
    */
   async createMilestone({ title, description, dueOn = null }) {
     try {
-      const { data } = await this.octokit.issues.createMilestone({
+      const params = {
         owner: this.owner,
         repo: this.repo,
         title,
         description,
-        due_on: dueOn,
-      });
+      };
+      
+      // Only add due_on if it's provided
+      if (dueOn) {
+        params.due_on = dueOn;
+      }
+      
+      const { data } = await this.octokit.issues.createMilestone(params);
 
       console.log(`✅ Created milestone: ${title}`);
       return data;

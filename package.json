@@ -20,6 +20,8 @@
     "dashboard:engine": "node scripts/dashboard-engine.js",
     "dashboard:server": "node scripts/server.js",
     "dashboard:start": "node scripts/start-all.js",
+    "github:sync": "node scripts/github-sync.js full",
+    "github:test": "node scripts/github-sync.js test",
     "prepare": "husky install"
   },
   "devDependencies": {
