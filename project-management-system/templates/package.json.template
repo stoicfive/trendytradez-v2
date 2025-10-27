@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dashboard:dev": "live-server project-management-system/dashboard/ --port=3000 --open=/index.html",
+    "dashboard:validate": "node project-management-system/scripts/validate-dashboard.js",
+    "dashboard:update": "node project-management-system/scripts/update-dashboard.js",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "husky": "^9.1.7",
+    "live-server": "^1.2.2"
+  }
+}

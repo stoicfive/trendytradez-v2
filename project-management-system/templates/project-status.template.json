@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "lastUpdated": "2025-01-01T00:00:00Z",
+    "version": "0.1.0"
+  },
+  "stats": {
+    "plansComplete": {
+      "current": 0,
+      "total": 5,
+      "percentage": 0
+    },
+    "packagesCreated": {
+      "current": 0,
+      "total": 10,
+      "percentage": 0
+    },
+    "currentPhase": "Week 1",
+    "weeksTotal": "8-10"
+  },
+  "currentStatus": [
+    {
+      "title": "Project Setup",
+      "description": "Initial project configuration",
+      "status": "pending"
+    }
+  ],
+  "nextActions": [
+    {
+      "title": "Current Task: Setup Project",
+      "description": "Configure initial project structure",
+      "status": "active",
+      "priority": "high"
+    },
+    {
+      "title": "Up Next: First Feature",
+      "description": "Start building first feature",
+      "status": "queued",
+      "priority": "medium"
+    }
+  ],
+  "blockers": {
+    "hasBlockers": false,
+    "message": "All systems operational. Ready to proceed with implementation."
+  },
+  "packages": [
+    {
+      "name": "package-1",
+      "description": "First package description",
+      "status": "pending"
+    },
+    {
+      "name": "package-2",
+      "description": "Second package description",
+      "status": "pending"
+    }
+  ],
+  "recentCommits": [
+    {
+      "message": "Initial commit",
+      "hash": "abc1234",
+      "date": "Jan 1, 2025"
+    }
+  ]
+}
