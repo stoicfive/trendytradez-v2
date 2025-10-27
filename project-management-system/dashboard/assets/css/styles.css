@@ -182,27 +182,57 @@ nav a.active {
     color: white;
 }
 
-/* Epic Styles */
+/* Epic Styles - Enhanced */
 .epic {
-    margin-bottom: 35px;
-    border-left: 4px solid #58a6ff;
-    background: #161b22;
-    border-radius: 8px;
-    padding: 15px 20px;
-    border: 1px solid #30363d;
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.95) 0%, rgba(28, 33, 40, 0.95) 100%);
+    border: 1px solid rgba(48, 54, 61, 0.8);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.epic:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+    border-color: rgba(31, 111, 235, 0.5);
 }
 
 .epic-header {
+    padding: 18px 24px;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    cursor: pointer;
-    user-select: none;
+    background: linear-gradient(135deg, rgba(28, 33, 40, 0.8) 0%, rgba(33, 38, 45, 0.8) 100%);
+    border-bottom: 1px solid rgba(48, 54, 61, 0.6);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.epic-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(31, 111, 235, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.epic-header:hover::before {
+    transform: translateX(100%);
 }
 
 .epic-header:hover {
-    opacity: 0.8;
+    background: linear-gradient(135deg, rgba(33, 38, 45, 0.9) 0%, rgba(38, 43, 50, 0.9) 100%);
+    border-bottom-color: rgba(31, 111, 235, 0.3);
 }
 
 .epic-title {
@@ -215,23 +245,42 @@ nav a.active {
 }
 
 .collapse-icon {
-    transition: transform 0.2s;
-    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
     font-size: 14px;
+    color: #8b949e;
+    background: rgba(139, 148, 158, 0.1);
+    border-radius: 4px;
 }
 
-.epic.collapsed .collapse-icon {
+.epic-header:hover .collapse-icon,
+.story-header:hover .collapse-icon {
+    background: rgba(88, 166, 255, 0.2);
+    color: #58a6ff;
+    transform: scale(1.1);
+}
+
+.epic.collapsed .collapse-icon,
+.story.collapsed .collapse-icon {
     transform: rotate(-90deg);
 }
 
+.epic.collapsed .epic-header:hover .collapse-icon,
+.story.collapsed .story-header:hover .collapse-icon {
+    transform: rotate(-90deg) scale(1.1);
+}
+
 .epic-content {
-    max-height: 5000px;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 .epic.collapsed .epic-content {
-    max-height: 0;
+    display: none;
 }
 
 .epic-progress {
@@ -284,31 +333,58 @@ nav a.active {
 }
 
 .story-subtasks {
-    max-height: 5000px;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 .story.collapsed .story-subtasks {
-    max-height: 0;
+    display: none;
 }
 
-/* Subtask Styles */
+/* Subtask Styles - Enhanced */
 .subtask {
-    background: #161b22;
-    padding: 10px 12px;
-    margin: 8px 0 8px 20px;
-    border-radius: 4px;
-    border-left: 2px solid #30363d;
-    font-size: 14px;
+    padding: 12px 16px;
+    margin: 10px 0 10px 24px;
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.4) 0%, rgba(22, 27, 34, 0.4) 100%);
+    border-left: 3px solid rgba(48, 54, 61, 0.8);
+    border-radius: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.subtask::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: linear-gradient(90deg, rgba(31, 111, 235, 0.1) 0%, transparent 100%);
+    transition: width 0.3s ease;
+}
+
+.subtask:hover::before {
+    width: 100%;
+}
+
+.subtask:hover {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.6) 0%, rgba(28, 33, 40, 0.6) 100%);
+    border-left-color: #58a6ff;
+    transform: translateX(4px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .subtask.complete {
-    border-left-color: #3fb950;
     opacity: 0.7;
+    border-left-color: #3fb950;
+}
+
+.subtask.complete:hover {
+    opacity: 0.85;
 }
 
 .subtask-name {
@@ -332,27 +408,82 @@ nav a.active {
     color: white;
 }
 
-/* Badge Styles */
+/* Badge Styles - Enhanced */
 .badge {
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.badge::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.badge:hover::before {
+    width: 200px;
+    height: 200px;
+}
+
+.badge:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .badge.complete {
-    background: #238636;
+    background: linear-gradient(135deg, #238636 0%, #3fb950 100%);
     color: white;
+    box-shadow: 0 2px 8px rgba(35, 134, 54, 0.4);
+}
+
+.badge.complete:hover {
+    box-shadow: 0 4px 12px rgba(35, 134, 54, 0.6);
 }
 
 .badge.in-progress {
-    background: #1f6feb;
+    background: linear-gradient(135deg, #1f6feb 0%, #58a6ff 100%);
     color: white;
+    box-shadow: 0 2px 8px rgba(31, 111, 235, 0.4);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.badge.in-progress:hover {
+    box-shadow: 0 4px 12px rgba(31, 111, 235, 0.6);
+    animation: none;
 }
 
 .badge.pending {
-    background: #6e7681;
+    background: linear-gradient(135deg, #6e7681 0%, #8b949e 100%);
     color: white;
+    box-shadow: 0 2px 8px rgba(110, 118, 129, 0.3);
+}
+
+.badge.pending:hover {
+    box-shadow: 0 4px 12px rgba(110, 118, 129, 0.5);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
 }
 
 /* Stats Grid */

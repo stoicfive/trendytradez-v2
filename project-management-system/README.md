@@ -5,11 +5,13 @@ A portable, automated project management dashboard system that can be integrated
 ## 🎯 Features
 
 - **Automated Dashboard** - JSON-driven, dynamically rendered
+- **Modern UI/UX** - Glassmorphism, animations, micro-interactions
 - **CLI Tools** - Update dashboard via command line
 - **Pre-commit Validation** - Ensures data integrity
-- **Mobile Responsive** - Works on all devices
-- **Collapsible Sections** - Clean, organized interface
+- **Mobile Responsive** - Works on all devices with hamburger menu
+- **Collapsible Sections** - Clean, organized interface with working toggles
 - **Real-time Updates** - Changes appear instantly
+- **Design System** - Comprehensive component library included
 
 ## 📦 What's Included
 
@@ -72,6 +74,7 @@ open project-management-system/dashboard/index.html
 ## 🎓 For Cascade AI
 
 If you're Cascade AI helping with this project, read:
+
 - `docs/CASCADE_WORKFLOW.md` - How to use this system
 - `docs/CASCADE_INSTRUCTIONS.md` - Workflow automation guide
 
@@ -92,6 +95,7 @@ If you're Cascade AI helping with this project, read:
 ## 🎨 Customization
 
 The system is fully customizable:
+
 - Change colors in `dashboard/assets/css/styles.css`
 - Modify data structure in `dashboard/data/schema.json`
 - Add custom sections to dashboard

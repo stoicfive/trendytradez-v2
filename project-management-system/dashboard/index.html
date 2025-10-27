@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrendyTradez v2 - Project Dashboard</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
 <body>
     <!-- Remove duplicate inline styles - using external CSS -->
@@ -618,266 +619,322 @@
             </div>
         </div>
 
-        <!-- Plans Section -->
+                <!-- Plans Section -->
         <div id="plans" class="content">
             <div class="section">
                 <h2>Implementation Roadmap</h2>
                 
-                <!-- EPIC 1: Foundation -->
-                <div class="epic">
-                    <div class="epic-header">
-                        <div class="epic-title">
+<!-- EPIC 1 -->
+        <div class="epic" id="epic-1">
+            <div class="epic-header" onclick="toggleEpic('epic-1')">
+                <div class="epic-title">
+                    <span class="collapse-icon">▼</span>
+                    EPIC 1: Foundation
+                </div>
+                <div class="epic-progress">Week 1-2 • 2/2 Stories Complete</div>
+            </div>
+            <div class="epic-content">
+                <!-- Story 1.1 -->
+                <div class="story" id="story-1-1">
+                    <div class="story-header" onclick="toggleStory(event, 'story-1-1')">
+                        <div class="story-title">
                             <span class="collapse-icon">▼</span>
-                            EPIC 1: Foundation
+                            Story 1.1: Project Setup
                         </div>
-                        <div class="epic-progress">Week 1-2 • 2/2 Stories Complete</div>
+                        <span class="badge complete">Complete</span>
                     </div>
-                    <div class="epic-content">
-
-                    <!-- Story 1.1: Project Setup -->
-                    <div class="story">
-                        <div class="story-header">
-                            <div class="story-title"><span class="collapse-icon">▼</span>Story 1.1: Project Setup</div>
-                            <span class="badge complete">Complete</span>
+                    <div class="story-content">
+                        <div class="subtask complete">
+                            <span>Initialize monorepo structure</span>
+                            <span class="badge complete">Done</span>
                         </div>
                         <div class="subtask complete">
-                            <div class="subtask-name">Initialize monorepo structure</div>
-                            <span class="subtask-badge complete">Done</span>
+                            <span>Configure Turborepo + PNPM</span>
+                            <span class="badge complete">Done</span>
                         </div>
                         <div class="subtask complete">
-                            <div class="subtask-name">Configure Turborepo + PNPM</div>
-                            <span class="subtask-badge complete">Done</span>
+                            <span>Set up TypeScript configuration</span>
+                            <span class="badge complete">Done</span>
                         </div>
                         <div class="subtask complete">
-                            <div class="subtask-name">Set up TypeScript configuration</div>
-                            <span class="subtask-badge complete">Done</span>
+                            <span>Configure ESLint and Prettier</span>
+                            <span class="badge complete">Done</span>
                         </div>
                         <div class="subtask complete">
-                            <div class="subtask-name">Configure ESLint and Prettier</div>
-                            <span class="subtask-badge complete">Done</span>
-                        </div>
-                        <div class="subtask complete">
-                            <div class="subtask-name">Create documentation structure</div>
-                            <span class="subtask-badge complete">Done</span>
-                        </div>
-                    </div>
-
-                    <!-- Story 1.2: Shared Packages -->
-                    <div class="story">
-                        <div class="story-header">
-                            <div class="story-title"><span class="collapse-icon">▼</span>Story 1.2: Shared Packages</div>
-                            <span class="badge complete">Complete</span>
-                        </div>
-                        <div class="subtask complete">
-                            <div class="subtask-name">Create @trendytradez/types package</div>
-                            <span class="subtask-badge complete">Done</span>
-                        </div>
-                        <div class="subtask complete">
-                            <div class="subtask-name">Create @trendytradez/utils package</div>
-                            <span class="subtask-badge complete">Done</span>
-                        </div>
-                        <div class="subtask complete">
-                            <div class="subtask-name">Create @trendytradez/theme package</div>
-                            <span class="subtask-badge complete">Done</span>
-                        </div>
-                        <div class="subtask complete">
-                            <div class="subtask-name">Create @trendytradez/config package</div>
-                            <span class="subtask-badge complete">Done</span>
-                        </div>
-                        <div class="subtask complete">
-                            <div class="subtask-name">Create @trendytradez/ui package (Tailwind + Tremor)</div>
-                            <span class="subtask-badge complete">Done</span>
+                            <span>Create documentation structure</span>
+                            <span class="badge complete">Done</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- EPIC 2: Core Features -->
-                <div class="epic">
-                    <div class="epic-header">
-                        <div class="epic-title"><span class="collapse-icon">▼</span>EPIC 2: Core Features</div>
-                        <div class="epic-progress">Week 2-4 • 0/2 Stories Complete</div>
+                <!-- Story 1.2 -->
+                <div class="story" id="story-1-2">
+                    <div class="story-header" onclick="toggleStory(event, 'story-1-2')">
+                        <div class="story-title">
+                            <span class="collapse-icon">▼</span>
+                            Story 1.2: Shared Packages
+                        </div>
+                        <span class="badge complete">Complete</span>
                     </div>
+                    <div class="story-content">
+                        <div class="subtask complete">
+                            <span>Create @trendytradez/types package</span>
+                            <span class="badge complete">Done</span>
+                        </div>
+                        <div class="subtask complete">
+                            <span>Create @trendytradez/utils package</span>
+                            <span class="badge complete">Done</span>
+                        </div>
+                        <div class="subtask complete">
+                            <span>Create @trendytradez/theme package</span>
+                            <span class="badge complete">Done</span>
+                        </div>
+                        <div class="subtask complete">
+                            <span>Create @trendytradez/config package</span>
+                            <span class="badge complete">Done</span>
+                        </div>
+                        <div class="subtask complete">
+                            <span>Create @trendytradez/ui package (Tailwind + Tremor)</span>
+                            <span class="badge complete">Done</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    <!-- Story 2.1: Widget System -->
-                    <div class="story pending">
-                        <div class="story-header">
-                            <div class="story-title"><span class="collapse-icon">▼</span>Story 2.1: Widget System</div>
+        <!-- EPIC 2 -->
+        <div class="epic" id="epic-2">
+            <div class="epic-header" onclick="toggleEpic('epic-2')">
+                <div class="epic-title">
+                    <span class="collapse-icon">▼</span>
+                    EPIC 2: Core Features
+                </div>
+                <div class="epic-progress">Week 2-4 • 0/2 Stories Complete</div>
+            </div>
+            <div class="epic-content">
+                <!-- Story 2.1 -->
+                <div class="story" id="story-2-1">
+                    <div class="story-header" onclick="toggleStory(event, 'story-2-1')">
+                        <div class="story-title">
+                            <span class="collapse-icon">▼</span>
+                            Story 2.1: Widget System
+                        </div>
+                        <span class="badge pending">Pending</span>
+                    </div>
+                    <div class="story-content">
+                        <div class="subtask">
+                            <span>Create widget registry and context</span>
                             <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Create widget registry and context</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Build widget container components</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Implement drag-and-drop system</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Create widget types (TradingView, Calculator, etc.)</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Add widget persistence layer</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                    </div>
-
-                    <!-- Story 2.2: Dashboard Core -->
-                    <div class="story pending">
-                        <div class="story-header">
-                            <div class="story-title"><span class="collapse-icon">▼</span>Story 2.2: Dashboard Core</div>
+                            <span>Build widget container components</span>
                             <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Build dashboard canvas with grid system</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Implement drag-and-drop system</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Create layout components (header, sidebar, toolbar)</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Create widget types (TradingView, Calculator, etc.)</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Implement dashboard state management</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Add fullscreen mode and keyboard shortcuts</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Add widget persistence layer</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- EPIC 3: Trading Features -->
-                <div class="epic">
-                    <div class="epic-header">
-                        <div class="epic-title"><span class="collapse-icon">▼</span>EPIC 3: Trading Features</div>
-                        <div class="epic-progress">Week 4-5 • 0/1 Stories Complete</div>
+                <!-- Story 2.2 -->
+                <div class="story" id="story-2-2">
+                    <div class="story-header" onclick="toggleStory(event, 'story-2-2')">
+                        <div class="story-title">
+                            <span class="collapse-icon">▼</span>
+                            Story 2.2: Dashboard Core
+                        </div>
+                        <span class="badge pending">Pending</span>
                     </div>
-
-                    <!-- Story 3.1: Trading Tools -->
-                    <div class="story pending">
-                        <div class="story-header">
-                            <div class="story-title"><span class="collapse-icon">▼</span>Story 3.1: Trading Tools</div>
+                    <div class="story-content">
+                        <div class="subtask">
+                            <span>Build dashboard canvas with grid system</span>
                             <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Options P&L calculator</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Create layout components (header, sidebar, toolbar)</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Position sizing calculator</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Implement dashboard state management</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Stop-loss calculator</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Add fullscreen mode and keyboard shortcuts</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EPIC 3 -->
+        <div class="epic" id="epic-3">
+            <div class="epic-header" onclick="toggleEpic('epic-3')">
+                <div class="epic-title">
+                    <span class="collapse-icon">▼</span>
+                    EPIC 3: Trading Features
+                </div>
+                <div class="epic-progress">Week 4-5 • 0/1 Stories Complete</div>
+            </div>
+            <div class="epic-content">
+                <!-- Story 3.1 -->
+                <div class="story" id="story-3-1">
+                    <div class="story-header" onclick="toggleStory(event, 'story-3-1')">
+                        <div class="story-title">
+                            <span class="collapse-icon">▼</span>
+                            Story 3.1: Trading Tools
+                        </div>
+                        <span class="badge pending">Pending</span>
+                    </div>
+                    <div class="story-content">
+                        <div class="subtask">
+                            <span>Options P&L calculator</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Crypto portfolio tracker</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Position sizing calculator</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Leverage calculator</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Stop-loss calculator</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <span>Crypto portfolio tracker</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <span>Leverage calculator</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EPIC 4 -->
+        <div class="epic" id="epic-4">
+            <div class="epic-header" onclick="toggleEpic('epic-4')">
+                <div class="epic-title">
+                    <span class="collapse-icon">▼</span>
+                    EPIC 4: Application Integration
+                </div>
+                <div class="epic-progress">Week 5-6 • 0/1 Stories Complete</div>
+            </div>
+            <div class="epic-content">
+                <!-- Story 4.1 -->
+                <div class="story" id="story-4-1">
+                    <div class="story-header" onclick="toggleStory(event, 'story-4-1')">
+                        <div class="story-title">
+                            <span class="collapse-icon">▼</span>
+                            Story 4.1: Web Application
+                        </div>
+                        <span class="badge pending">Pending</span>
+                    </div>
+                    <div class="story-content">
+                        <div class="subtask">
+                            <span>Set up Vite + React app</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <span>Integrate all packages</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <span>Implement routing (React Router)</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <span>Add authentication (Firebase)</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <span>Configure production build</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EPIC 5 -->
+        <div class="epic" id="epic-5">
+            <div class="epic-header" onclick="toggleEpic('epic-5')">
+                <div class="epic-title">
+                    <span class="collapse-icon">▼</span>
+                    EPIC 5: Quality & Deployment
+                </div>
+                <div class="epic-progress">Week 6-7 • 0/2 Stories Complete</div>
+            </div>
+            <div class="epic-content">
+                <!-- Story 5.1 -->
+                <div class="story" id="story-5-1">
+                    <div class="story-header" onclick="toggleStory(event, 'story-5-1')">
+                        <div class="story-title">
+                            <span class="collapse-icon">▼</span>
+                            Story 5.1: Testing & QA
+                        </div>
+                        <span class="badge pending">Pending</span>
+                    </div>
+                    <div class="story-content">
+                        <div class="subtask">
+                            <span>Achieve >80% unit test coverage</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <span>Set up E2E testing with Playwright</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <span>Add visual regression testing</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <div class="subtask">
+                            <span>Configure CI/CD pipeline</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- EPIC 4: Application Integration -->
-                <div class="epic">
-                    <div class="epic-header">
-                        <div class="epic-title"><span class="collapse-icon">▼</span>EPIC 4: Application Integration</div>
-                        <div class="epic-progress">Week 5-6 • 0/1 Stories Complete</div>
+                <!-- Story 5.2 -->
+                <div class="story" id="story-5-2">
+                    <div class="story-header" onclick="toggleStory(event, 'story-5-2')">
+                        <div class="story-title">
+                            <span class="collapse-icon">▼</span>
+                            Story 5.2: Deployment & DevOps
+                        </div>
+                        <span class="badge pending">Pending</span>
                     </div>
-
-                    <!-- Story 4.1: Web Application -->
-                    <div class="story pending">
-                        <div class="story-header">
-                            <div class="story-title"><span class="collapse-icon">▼</span>Story 4.1: Web Application</div>
+                    <div class="story-content">
+                        <div class="subtask">
+                            <span>Configure production hosting (Vercel)</span>
                             <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Set up Vite + React app</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Set up monitoring (Sentry)</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Integrate all packages</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Add analytics (Plausible)</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                         <div class="subtask">
-                            <div class="subtask-name">Implement routing (React Router)</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Add authentication (Firebase)</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Configure production build</div>
-                            <span class="subtask-badge pending">Pending</span>
+                            <span>Configure staging environment</span>
+                            <span class="badge pending">Pending</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- EPIC 5: Quality & Deployment -->
-                <div class="epic">
-                    <div class="epic-header">
-                        <div class="epic-title"><span class="collapse-icon">▼</span>EPIC 5: Quality & Deployment</div>
-                        <div class="epic-progress">Week 6-7 • 0/2 Stories Complete</div>
-                    </div>
-
-                    <!-- Story 5.1: Testing & QA -->
-                    <div class="story pending">
-                        <div class="story-header">
-                            <div class="story-title"><span class="collapse-icon">▼</span>Story 5.1: Testing & QA</div>
-                            <span class="badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Achieve >80% unit test coverage</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Set up E2E testing with Playwright</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Add visual regression testing</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Configure CI/CD pipeline</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                    </div>
-
-                    <!-- Story 5.2: Deployment -->
-                    <div class="story pending">
-                        <div class="story-header">
-                            <div class="story-title"><span class="collapse-icon">▼</span>Story 5.2: Deployment & DevOps</div>
-                            <span class="badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Configure production hosting (Vercel)</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Set up monitoring (Sentry)</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Add analytics (Plausible)</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                        <div class="subtask">
-                            <div class="subtask-name">Configure staging environment</div>
-                            <span class="subtask-badge pending">Pending</span>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
             </div>
         </div>
 

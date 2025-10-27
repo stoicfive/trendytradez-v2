@@ -5,7 +5,6 @@
 // Initialize navigation when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
-    initCollapsible();
     initMobileMenu();
 });
 
@@ -37,22 +36,21 @@ function initNavigation() {
 }
 
 /**
- * Initialize collapsible epics and stories
+ * Toggle functions for epics and stories (called from inline onclick)
  */
-function initCollapsible() {
-    // Collapsible Epics
-    document.querySelectorAll('.epic-header').forEach(header => {
-        header.addEventListener('click', () => {
-            header.parentElement.classList.toggle('collapsed');
-        });
-    });
+window.toggleEpic = function(epicId) {
+    const epic = document.getElementById(epicId);
+    if (epic) {
+        epic.classList.toggle('collapsed');
+    }
+}
 
-    // Collapsible Stories
-    document.querySelectorAll('.story-header').forEach(header => {
-        header.addEventListener('click', () => {
-            header.parentElement.classList.toggle('collapsed');
-        });
-    });
+window.toggleStory = function(event, storyId) {
+    event.stopPropagation();
+    const story = document.getElementById(storyId);
+    if (story) {
+        story.classList.toggle('collapsed');
+    }
 }
 
 /**
