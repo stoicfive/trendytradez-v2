@@ -25,6 +25,27 @@ body {
     height: 100vh;
     overflow-y: auto;
     z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+/* Mobile sidebar toggle */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 101;
+    background: #1f6feb;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.sidebar-toggle:hover {
+    background: #1a5cd7;
 }
 
 .sidebar-header {
@@ -481,4 +502,141 @@ footer {
     font-size: 14px;
     border-top: 1px solid #30363d;
     margin-top: 50px;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        width: 80%;
+        max-width: 300px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 70px 15px 20px;
+        width: 100%;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+    }
+
+    .package-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .epic {
+        padding: 10px 15px;
+    }
+
+    .epic-title {
+        font-size: 18px;
+    }
+
+    .story {
+        padding: 12px;
+    }
+
+    .subtask {
+        margin-left: 10px;
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .sidebar-nav a {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+
+    .quick-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .quick-links a {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 90%;
+    }
+
+    .main-content {
+        padding: 60px 10px 15px;
+    }
+
+    header {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 18px;
+    }
+
+    .stat-value {
+        font-size: 20px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+    }
+
+    .epic-title {
+        font-size: 16px;
+    }
+
+    .story-title {
+        font-size: 14px;
+    }
+
+    .badge {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+
+    .plan-name {
+        font-size: 14px;
+    }
+
+    .plan-desc {
+        font-size: 12px;
+    }
 }
