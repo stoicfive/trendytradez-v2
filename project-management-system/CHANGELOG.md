@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.2.0] - 2025-10-27
+
+### Added
+- Comprehensive WORKFLOW_CHECKLIST.md for maintaining dashboard
+- Auto-update git commits in dashboard from git log
+- Epic and story status handling in CLI tool
+- Better error messages and warnings in update script
+- Documentation of manual vs automated steps
+
+### Fixed
+- Dashboard update workflow - now properly handles epic completion
+- CLI tool now supports --epic and --story flags
+- Auto-syncs recent commits from git
+- Clear documentation of what requires manual updates
+
+### Changed
+- Enhanced update-dashboard.js with better automation
+- Improved feedback messages in CLI tool
+- Better documentation of workflow gaps
+
 ## [1.1.0] - 2025-10-27
 
 ### Added

@@ -6,12 +6,14 @@ A portable, automated project management dashboard system that can be integrated
 
 - **Automated Dashboard** - JSON-driven, dynamically rendered
 - **Modern UI/UX** - Glassmorphism, animations, micro-interactions
-- **CLI Tools** - Update dashboard via command line
+- **CLI Tools** - Update dashboard via command line with epic/story tracking
 - **Pre-commit Validation** - Ensures data integrity
 - **Mobile Responsive** - Works on all devices with hamburger menu
 - **Collapsible Sections** - Clean, organized interface with working toggles
 - **Real-time Updates** - Changes appear instantly
 - **Design System** - Comprehensive component library included
+- **Workflow Documentation** - Complete checklist for maintaining dashboard
+- **Auto Git Sync** - Automatically updates recent commits from git log
 
 ## 📦 What's Included
 
