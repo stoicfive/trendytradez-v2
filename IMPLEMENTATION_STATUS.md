@@ -4,6 +4,22 @@
 
 Building fully automated project management dashboard that watches codebase and updates in real-time.
 
+## GitHub Integration
+
+### Phase 1-3: Complete ✅
+- GitHub API service with Octokit
+- Dashboard → GitHub sync (packages to milestones, plans to issues)
+- GitHub → Dashboard webhooks (issues, milestones, releases)
+- 7 packages and 10 plans synced to GitHub
+- Webhook server running on port 3004
+
+### Commands
+```bash
+pnpm github:sync       # Sync to GitHub
+pnpm github:test       # Test connection
+pnpm github:webhooks   # Start webhook server
+```
+
 ## Completed Phases ✅
 
 ### Phase 1: File System Watcher
