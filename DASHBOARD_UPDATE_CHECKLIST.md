@@ -2,124 +2,206 @@
 
 This checklist ensures the project dashboard stays current after each implementation step.
 
-## Dashboard Location
+## 🚀 Dashboard System (Automated)
 
-The modular dashboard is located at `/dashboard/index.html` with:
-- Styles: `/dashboard/assets/css/styles.css`
-- JavaScript: `/dashboard/assets/js/navigation.js`
-- Icons: `/dashboard/assets/js/icons.js`
+The dashboard now uses **automated updates** via JSON data:
 
-The legacy `project-dashboard.html` in root is deprecated.
+### Dashboard Location
+- **Data**: `/dashboard/data/project-status.json` (single source of truth)
+- **UI**: `/dashboard/index.html` (dynamically renders from JSON)
+- **Styles**: `/dashboard/assets/css/styles.css`
+- **Scripts**: 
+  - `/dashboard/assets/js/navigation.js` (navigation & collapsible)
+  - `/dashboard/assets/js/data-loader.js` (dynamic rendering)
+  - `/dashboard/assets/js/icons.js` (SVG icons)
 
-## After Completing a Sub-task
+### Legacy Files
+- `project-dashboard.html` → Redirect to new dashboard
+- `project-dashboard.html.deprecated` → Old static version (backup)
 
-- [ ] Mark sub-task as complete in the dashboard
-- [ ] Update sub-task badge from "Pending" to "Done"
-- [ ] Add `complete` class to sub-task element
-- [ ] Update "Next Actions" section with new current task
+## ⚡ Quick Update Commands
 
-## After Completing a Story
+Use the CLI tool instead of manual editing:
 
-- [ ] Update story status badge (Pending → In Progress → Complete)
-- [ ] Update story border color (gray → blue → green)
-- [ ] Update Epic progress counter (e.g., "1/2 Stories Complete" → "2/2 Stories Complete")
-- [ ] Move to next story in Epic
+```bash
+# Update package status
+pnpm dashboard:update --package="@trendytradez/widgets" --status="complete"
+
+# Update plan progress
+pnpm dashboard:update --plan --status="3/8"
+
+# Add commit
+pnpm dashboard:update --add-commit="feat: new feature"
+
+# Update current task
+pnpm dashboard:update --current-task="Build Dashboard" --task-desc="Description"
+
+# Set/clear blockers
+pnpm dashboard:update --set-blocker="Waiting for API docs"
+pnpm dashboard:update --clear-blocker
+
+# Validate data
+pnpm dashboard:validate
+```
 
 ## After Completing a Package
 
-- [ ] Update package status in "Packages" section (Pending → Complete)
-- [ ] Update "Packages Created" stat (e.g., "2/9" → "3/9")
-- [ ] Update progress bar percentage
-- [ ] Update "Current Status" section in Overview
-- [ ] Update package description if it changed (e.g., "Shared UI" → "Tailwind + Tremor")
-- [ ] Mark corresponding sub-task as complete in Implementation Plans
+**Automated Method** (Recommended):
+```bash
+pnpm dashboard:update --package="@trendytradez/widgets" --status="complete"
+```
 
-## After Completing an Epic
+**Manual Method** (If needed):
+- [ ] Edit `dashboard/data/project-status.json`
+- [ ] Update package status: `"status": "complete"`
+- [ ] Stats auto-calculate on update
+- [ ] Run `pnpm dashboard:validate` to verify
+- [ ] Commit JSON file
 
-- [ ] Update Epic progress to show all stories complete
-- [ ] Update "Plans Complete" stat
-- [ ] Update overall progress bar
-- [ ] Add completion note in "Blockers & Notes" if needed
+**What Updates Automatically**:
+- ✅ Package status badge
+- ✅ "Packages Created" stat (e.g., "2/9" → "3/9")
+- ✅ Progress bar percentage
+- ✅ Last updated timestamp
 
 ## After Each Git Commit
 
-- [ ] Add commit to "Recent Commits" section
-- [ ] Include commit message, date, and short hash
-- [ ] Keep only last 6-8 commits visible
+**Automated Method**:
+```bash
+pnpm dashboard:update --add-commit="feat: your commit message"
+```
 
-## General Updates
+**What Updates Automatically**:
+- ✅ Adds commit to "Recent Commits" section
+- ✅ Includes message, date, and short hash
+- ✅ Keeps only last 6 commits
+- ✅ Updates timestamp
 
-- [ ] Update "Last Updated" timestamp in footer
-- [ ] Update "Next Actions" section with current and upcoming tasks
-- [ ] Add any blockers to "Blockers & Notes" section
-- [ ] Update implementation summaries in `/implementation/summaries/`
-- [ ] Update "Current Status" descriptions to reflect latest work
-- [ ] Commit dashboard changes with descriptive message
+## After Updating Current Task
 
-## After Adding New Technology/Framework
+**Automated Method**:
+```bash
+pnpm dashboard:update --current-task="Build Dashboard Core" --task-desc="Create canvas layout"
+```
 
-- [ ] Update relevant package descriptions to mention the technology
-- [ ] Update "Current Status" to highlight the new addition
-- [ ] Add to "Next Actions" if it requires follow-up work (e.g., refactoring)
-- [ ] Create memory for the new technology/framework decision
+**What Updates Automatically**:
+- ✅ Updates first item in "Next Actions"
+- ✅ Updates task description
+- ✅ Updates timestamp
 
-## Quick Reference: What to Update Where
+## After Setting/Clearing Blockers
 
-### Overview Tab
-- Progress statistics (Plans, Packages, Phase)
-- Current Status section
-- Next Actions section
-- Blockers & Notes section
+**Set Blocker**:
+```bash
+pnpm dashboard:update --set-blocker="Waiting for API documentation"
+```
 
-### Implementation Plans Tab
-- Epic progress counters
-- Story status badges
-- Sub-task completion status
-- Sub-task badges (Done/Pending)
+**Clear Blocker**:
+```bash
+pnpm dashboard:update --clear-blocker
+```
 
-### Packages Tab
-- Package status badges
-- Package completion state
+**What Updates Automatically**:
+- ✅ Updates "Blockers & Notes" section
+- ✅ Changes blocker status
+- ✅ Updates message
 
-### Recent Commits Tab
-- Add new commits at the top
-- Remove old commits (keep last 6-8)
+## After Completing an Epic
 
-### Footer
+**Automated Method**:
+```bash
+pnpm dashboard:update --plan --status="3/8"
+```
+
+**What Updates Automatically**:
+- ✅ "Plans Complete" stat
+- ✅ Overall progress bar percentage
+- ✅ Timestamp
+
+**Manual Updates Needed**:
+- [ ] Update Epic/Story HTML in `dashboard/index.html` (for Implementation Plans tab)
+- [ ] Update story status badges
+- [ ] Update sub-task completion status
+
+## 📊 What's Automated vs Manual
+
+### ✅ Fully Automated (via CLI)
+- Stats (Plans Complete, Packages Created, percentages)
+- Package statuses
+- Current Status items
+- Next Actions
+- Blockers & Notes
+- Recent Commits
 - Last Updated timestamp
+
+### ⚠️ Manual Updates Required
+- Epic/Story structure in Implementation Plans tab
+- Sub-task completion status
+- Story status badges
+- Quick Links section
+- Documentation links
 
 ---
 
-## Example Update Flow
+## 📝 Example Update Flow
 
 ### Scenario: Just completed @trendytradez/ui package
 
-1. **Overview Tab**:
-   - Update "Packages Created" from "2/9" to "3/9"
-   - Update progress bar from 22% to 33%
-   - Update "Current Status" to show @trendytradez/ui complete
-   - Update "Next Actions" current task to @trendytradez/theme
+**Step 1: Update via CLI**
+```bash
+pnpm dashboard:update --package="@trendytradez/ui" --status="complete"
+```
 
-2. **Implementation Plans Tab**:
-   - Mark "Create @trendytradez/ui package" sub-task as complete
-   - Change badge from "Pending" to "Done"
-   - Add `complete` class to sub-task
+**Step 2: Add commit**
+```bash
+pnpm dashboard:update --add-commit="feat: complete UI package with Tailwind and Tremor"
+```
 
-3. **Packages Tab**:
-   - Change @trendytradez/ui badge from "Pending" to "Complete"
+**Step 3: Validate**
+```bash
+pnpm dashboard:validate
+```
 
-4. **Recent Commits Tab**:
-   - Add new commit entry at top
+**Step 4: Commit JSON**
+```bash
+git add dashboard/data/project-status.json
+git commit -m "docs: mark UI package as complete"
+```
 
-5. **Footer**:
-   - Update timestamp
+**Step 5: Refresh dashboard**
+- Open `dashboard/index.html` in browser
+- Changes appear automatically! ✨
 
-6. **Commit**:
-   ```bash
-   git add project-dashboard.html
-   git commit -m "docs: update dashboard with @trendytradez/ui completion"
-   ```
+**What Updated Automatically**:
+- ✅ "Packages Created" stat (5/9 → 6/9)
+- ✅ Progress bar (56% → 67%)
+- ✅ Package badge (Pending → Complete)
+- ✅ Recent commit added
+- ✅ Timestamp updated
 
 ---
 
-**Remember**: The dashboard is our single source of truth for project status. Keep it updated!
+## 🔄 Pre-commit Hook
+
+The pre-commit hook automatically validates dashboard data:
+- Runs `pnpm dashboard:validate`
+- Checks JSON schema
+- Validates calculations
+- Prevents invalid data commits
+
+To bypass (emergency only):
+```bash
+git commit --no-verify
+```
+
+---
+
+## 📚 Additional Resources
+
+- [WORKFLOW.md](./WORKFLOW.md) - Complete workflow guide
+- [scripts/README.md](./scripts/README.md) - CLI tool documentation
+- [dashboard/README.md](./dashboard/README.md) - Dashboard architecture
+
+---
+
+**Remember**: The dashboard data (`project-status.json`) is our single source of truth. Use CLI tools for updates!
