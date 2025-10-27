@@ -22,6 +22,7 @@
     "dashboard:start": "node scripts/start-all.js",
     "github:sync": "node scripts/github-sync.js full",
     "github:test": "node scripts/github-sync.js test",
+    "github:webhooks": "node scripts/github-webhooks.js",
     "prepare": "husky install"
   },
   "devDependencies": {
