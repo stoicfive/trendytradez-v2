@@ -1,6 +1,15 @@
 # Dashboard Update Checklist
 
-Use this checklist every time you complete an implementation to ensure the project dashboard stays current.
+This checklist ensures the project dashboard stays current after each implementation step.
+
+## Dashboard Location
+
+The modular dashboard is located at `/dashboard/index.html` with:
+- Styles: `/dashboard/assets/css/styles.css`
+- JavaScript: `/dashboard/assets/js/navigation.js`
+- Icons: `/dashboard/assets/js/icons.js`
+
+The legacy `project-dashboard.html` in root is deprecated.
 
 ## After Completing a Sub-task
 
