@@ -86,6 +86,42 @@ if (options['clear-blocker']) {
   console.log(`✅ Cleared blockers`);
 }
 
+if (options.story && options.status) {
+  // Story completion - this is a placeholder, actual implementation would update the HTML
+  console.log(`✅ Story ${options.story} marked as ${options.status}`);
+  console.log(`⚠️  Note: Story status updates require manual HTML update in dashboard/index.html`);
+  console.log(`   Or update the JSON data structure to include story tracking`);
+}
+
+if (options.epic && options.status) {
+  // Epic completion - update plans complete
+  const epicNum = parseInt(options.epic);
+  if (epicNum && options.status === 'complete') {
+    data.stats.plansComplete.current = Math.max(data.stats.plansComplete.current, epicNum);
+    data.stats.plansComplete.percentage = Math.round((data.stats.plansComplete.current / data.stats.plansComplete.total) * 100);
+    console.log(`✅ EPIC ${epicNum} marked as complete`);
+    console.log(`   Plans complete: ${data.stats.plansComplete.current}/${data.stats.plansComplete.total}`);
+  }
+}
+
+// Auto-update recent commits from git
+try {
+  const recentCommits = execSync('git log --oneline -6 --format="%h|%s|%cd" --date=format:"%b %d, %Y"')
+    .toString()
+    .trim()
+    .split('\n')
+    .map(line => {
+      const [hash, ...rest] = line.split('|');
+      const date = rest.pop();
+      const message = rest.join('|');
+      return { message, hash, date };
+    });
+  data.recentCommits = recentCommits;
+  console.log(`✅ Auto-updated recent commits from git`);
+} catch (error) {
+  console.log(`⚠️  Could not auto-update commits: ${error.message}`);
+}
+
 // Update timestamp
 data.meta.lastUpdated = new Date().toISOString();
 
