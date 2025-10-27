@@ -2,7 +2,15 @@
  * Widget type definitions
  */
 
-export type WidgetType = 'tradingview' | 'calculator' | 'chart' | 'table' | 'note';
+export type WidgetType =
+  | 'tradingview'
+  | 'calculator'
+  | 'watchlist'
+  | 'news'
+  | 'portfolio'
+  | 'chart'
+  | 'table'
+  | 'note';
 
 export interface Position {
   x: number;
