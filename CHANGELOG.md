@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Automated dashboard system with JSON-driven data
+- Modern UI/UX design system with glassmorphism and animations
+- Mobile responsive dashboard with hamburger menu
+- CLI tools for dashboard updates (`pnpm dashboard:update`)
+- Pre-commit validation hooks for dashboard data
+- Portable project management system for reuse
+- Working epic/story collapse functionality
+- Design system CSS with comprehensive component library
+- Dynamic data rendering with JavaScript
 - Initial v2 project structure
 - Monorepo setup with Turborepo + PNPM
 - Implementation plans for all phases
@@ -19,6 +28,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Migrated from single-package to monorepo architecture
 - Improved TypeScript configuration
 - Enhanced testing strategy
+- Switched to inline onclick handlers for reliable toggles
+- Updated dashboard to use display:none for collapse
+
+### Fixed
+- Epic and story toggle functionality
+- Event bubbling issues in collapse handlers
+- CSS transitions for collapsed content
+- Mobile sidebar toggle behavior
 
 ### Removed
 - Legacy v1 scaffolding code
