@@ -1,271 +1,330 @@
 # TrendyTradez v2 - Development Workflow
 
-## 📋 Overview
+## Overview
 
-This document describes the automated workflow for managing the TrendyTradez v2 project.
+Automated development workflow with real-time dashboard tracking and GitHub integration.
 
-## 🚀 Quick Start
+## Daily Development Workflow
 
-### Daily Development
+### 1. Start Development Environment
+
 ```bash
-# Start development
+# Terminal 1: Start dashboard system
+pnpm dashboard:start
+
+# Terminal 2: Start dashboard UI (optional)
+cd dashboard-app && npm run dev
+
+# Terminal 3: Start development server
 pnpm dev
+```
 
-# Run dashboard locally
-pnpm dashboard:dev
+### 2. Write Code
 
-# Update dashboard after completing work
-pnpm dashboard:update --package="@trendytradez/widgets" --status="complete"
+- Make changes to packages or apps
+- File watcher automatically detects changes
+- Dashboard updates in real-time (<3 seconds)
+- No manual updates needed
 
-# Validate changes
-pnpm dashboard:validate
+### 3. Check Progress
 
-# Commit (pre-commit hooks run automatically)
+```bash
+# View current state
+pnpm dashboard:state
+
+# Check dashboard UI
+open http://localhost:3003
+
+# View stats
+curl http://localhost:3001/api/stats | jq
+```
+
+### 4. Sync to GitHub (Optional)
+
+```bash
+# Sync packages and plans to GitHub
+pnpm github:sync
+
+# Test connection
+pnpm github:test
+```
+
+### 5. Commit Changes
+
+```bash
+# Pre-commit hooks run automatically
 git add .
-git commit -m "feat: complete widgets package"
+git commit -m "feat: your feature description"
+
+# Dashboard validates automatically
+# Analysis runs on commit
 ```
 
-## 📊 Dashboard Management
+## Package Development Workflow
 
-### Automated Updates
-
-Instead of manually editing HTML, use the CLI:
+### Creating New Package
 
 ```bash
-# Update package status
-pnpm dashboard:update --package="@trendytradez/widgets" --status="complete"
-pnpm dashboard:update --package="@trendytradez/dashboard" --status="in-progress"
+# 1. Create package directory
+mkdir packages/new-feature
+cd packages/new-feature
 
-# Update plan progress
-pnpm dashboard:update --plan --status="3/8"
+# 2. Initialize package
+pnpm init
 
-# Add commit to dashboard
-pnpm dashboard:update --add-commit="feat: implement new feature"
+# 3. Add to workspace
+cd ../..
+pnpm install
 
-# Update current task
-pnpm dashboard:update --current-task="Build Dashboard" --task-desc="Create canvas layout"
-
-# Set/clear blockers
-pnpm dashboard:update --set-blocker="Waiting for API docs"
-pnpm dashboard:update --clear-blocker
+# 4. Dashboard detects automatically
+# Check: curl http://localhost:3001/api/packages | jq
 ```
 
-### Manual Data Editing
+### Completing Package
 
-Edit `dashboard/data/project-status.json` directly if needed:
+Requirements for "complete" status:
+- ✅ Has `dist/` folder (built)
+- ✅ Has tests
+- ✅ Has README.md
+- ✅ No TODO/FIXME comments
+- ✅ All dependencies resolved
 
-```json
-{
-  "stats": {
-    "packagesCreated": {
-      "current": 6,
-      "total": 9,
-      "percentage": 67
-    }
-  },
-  "packages": [
-    {
-      "name": "@trendytradez/widgets",
-      "description": "Widget system package",
-      "status": "complete"
-    }
-  ]
-}
-```
+Dashboard automatically marks complete when requirements met.
 
-Always run validation after manual edits:
-```bash
-pnpm dashboard:validate
-```
-
-## 🔍 Pre-commit Hooks
-
-Automatically runs on every commit:
-
-1. **Dashboard Validation** - Ensures data integrity
-2. **Linting** - Fixes code style issues
-3. **Type Checking** - Catches TypeScript errors
-4. **Tests** - Runs all unit tests
-
-To bypass (emergency only):
-```bash
-git commit --no-verify
-```
-
-## 🧪 Testing
+### Syncing to GitHub
 
 ```bash
-# Run all tests
+# Sync package to GitHub milestone
+pnpm github:sync
+
+# Check GitHub
+open https://github.com/stoicfive/trendytradez-v2/milestones
+```
+
+## Implementation Plan Workflow
+
+### Creating Plan
+
+```bash
+# 1. Create plan file
+touch implementation/plans/PLAN_NEW_FEATURE.md
+
+# 2. Add tasks with checkboxes
+# - [ ] Task 1
+# - [ ] Task 2
+# - [x] Task 3 (completed)
+
+# 3. Dashboard detects automatically
+# Progress calculated from checked boxes
+```
+
+### Tracking Progress
+
+- Dashboard shows progress percentage
+- Updates automatically when you check tasks
+- Syncs to GitHub tracking issue
+
+### Completing Plan
+
+- Check all tasks
+- Dashboard shows 100% progress
+- GitHub issue auto-closes (if synced)
+
+## Testing Workflow
+
+### Running Tests
+
+```bash
+# All tests
 pnpm test
 
-# Run tests in watch mode
-pnpm test:watch
+# Specific package
+cd packages/widgets && pnpm test
 
-# Run tests for specific package
-pnpm --filter @trendytradez/widgets test
+# Watch mode
+pnpm test --watch
+
+# Coverage automatically calculated
+# Dashboard shows coverage percentage
 ```
 
-## 🏗️ Building
+### Before Committing
 
 ```bash
-# Build all packages
-pnpm build
-
-# Build specific package
-pnpm --filter @trendytradez/widgets build
-
-# Clean and rebuild
-pnpm clean && pnpm build
-```
-
-## 📝 Code Quality
-
-```bash
-# Lint all code
 pnpm lint
-
-# Format all code
-pnpm format
-
-# Type check
 pnpm type-check
-```
-
-## 🎯 Workflow Best Practices
-
-### 1. Feature Development
-
-```bash
-# 1. Create feature branch
-git checkout -b feature/new-widget
-
-# 2. Develop feature
-# ... write code ...
-
-# 3. Update dashboard
-pnpm dashboard:update --current-task="Building new widget"
-
-# 4. Run tests
 pnpm test
-
-# 5. Commit (hooks run automatically)
-git add .
-git commit -m "feat: add new widget type"
-
-# 6. Update dashboard on completion
-pnpm dashboard:update --add-commit="feat: add new widget type"
+pnpm format
 ```
 
-### 2. Package Completion
+Pre-commit hooks run these automatically.
+
+## GitHub Integration Workflow
+
+### Initial Setup
 
 ```bash
-# 1. Mark package as complete
-pnpm dashboard:update --package="@trendytradez/widgets" --status="complete"
+# 1. Create .env file
+cp .env.example .env
 
-# 2. Validate
-pnpm dashboard:validate
+# 2. Add GitHub token
+# Get from: https://github.com/settings/tokens
 
-# 3. Commit dashboard update
-git add dashboard/data/project-status.json
-git commit -m "docs: mark widgets package as complete"
+# 3. Test connection
+pnpm github:test
+
+# 4. Initial sync
+pnpm github:sync
 ```
 
-### 3. Handling Blockers
+### Ongoing Sync
+
+**Automatic** (when file watcher running):
+- Code changes → Dashboard updates
+- Dashboard updates → Available for sync
+
+**Manual** (when needed):
+```bash
+pnpm github:sync
+```
+
+### Webhook Setup (Optional)
+
+For GitHub → Dashboard updates:
 
 ```bash
-# Set blocker
-pnpm dashboard:update --set-blocker="Waiting for design approval"
+# 1. Start webhook server
+pnpm github:webhooks
 
-# Clear when resolved
-pnpm dashboard:update --clear-blocker
+# 2. Configure in GitHub
+# Settings → Webhooks → Add webhook
+# URL: https://your-domain.com/webhooks/github
+# Secret: From .env file
 ```
 
-## 📂 Project Structure
+## Troubleshooting Workflow
 
-```
-trendytradez-v2/
-├── packages/           # Monorepo packages
-├── apps/              # Applications
-├── dashboard/         # Project dashboard
-│   ├── data/         # Dashboard data (JSON)
-│   ├── assets/       # CSS, JS, icons
-│   └── index.html    # Dashboard UI
-├── scripts/          # Automation scripts
-│   ├── validate-dashboard.js
-│   └── update-dashboard.js
-└── .husky/           # Git hooks
-```
-
-## 🔄 CI/CD Pipeline
-
-### GitHub Actions (Future)
-
-```yaml
-# Planned workflow
-- Validate dashboard data
-- Run linting
-- Run type checking
-- Run tests
-- Build packages
-- Deploy dashboard
-```
-
-## 📚 Additional Resources
-
-- [Dashboard Scripts README](./scripts/README.md)
-- [Dashboard Update Checklist](./DASHBOARD_UPDATE_CHECKLIST.md)
-- [Project Summary](./PROJECT_SUMMARY.md)
-- [Commands Reference](./COMMANDS.md)
-
-## 🆘 Troubleshooting
-
-### Pre-commit Hook Fails
+### Dashboard Not Updating
 
 ```bash
-# Check what failed
-pnpm dashboard:validate  # Dashboard validation
-pnpm lint               # Linting
-pnpm type-check         # Type checking
-pnpm test               # Tests
+# 1. Check services running
+curl http://localhost:3001/api/health
+curl http://localhost:3004/health
 
-# Fix issues and try again
-git add .
-git commit -m "fix: resolve issues"
+# 2. Restart dashboard
+pnpm dashboard:start
+
+# 3. Manual analysis
+pnpm dashboard:analyze
 ```
 
-### Dashboard Validation Errors
+### GitHub Sync Issues
 
 ```bash
-# View detailed errors
-pnpm dashboard:validate
+# 1. Test connection
+pnpm github:test
 
-# Common issues:
-# - Percentage mismatch: Recalculate manually
-# - Package count mismatch: Check package statuses
-# - Invalid JSON: Use JSON validator
+# 2. Check sync stats
+node scripts/github-db.js stats
+
+# 3. View mappings
+node scripts/github-db.js mappings
+
+# 4. Retry sync
+pnpm github:sync
 ```
 
-### Development Server Issues
+### Port Conflicts
 
 ```bash
-# Kill existing server
-lsof -ti:3000 | xargs kill -9
-
-# Restart
-pnpm dashboard:dev
+# Kill processes on ports
+lsof -ti:3001 | xargs kill  # API
+lsof -ti:3002 | xargs kill  # WebSocket
+lsof -ti:3003 | xargs kill  # Dashboard UI
+lsof -ti:3004 | xargs kill  # Webhooks
 ```
 
-## 💡 Tips
+## Best Practices
 
-1. **Always validate** after updating dashboard data
-2. **Use CLI tools** instead of manual HTML editing
-3. **Run tests** before committing
-4. **Keep commits atomic** - one feature per commit
-5. **Update dashboard** as you complete work, not at the end
+### Code Organization
 
-## 🎓 Learning Resources
+- Keep packages focused and small
+- Use workspace dependencies
+- Follow naming conventions
+- Write tests alongside code
 
-- [Turborepo Docs](https://turbo.build/repo/docs)
-- [PNPM Workspaces](https://pnpm.io/workspaces)
-- [Husky Git Hooks](https://typicode.github.io/husky/)
-- [JSON Schema](https://json-schema.org/)
+### Documentation
+
+- Update README when adding features
+- Document breaking changes
+- Keep implementation plans current
+- Add JSDoc comments
+
+### Git Workflow
+
+- Use conventional commits
+- Create feature branches
+- Keep commits atomic
+- Write descriptive messages
+
+### Dashboard Usage
+
+- Let automation handle updates
+- Check dashboard before committing
+- Sync to GitHub regularly
+- Monitor sync statistics
+
+## Automation Benefits
+
+### What's Automated
+
+✅ Package status detection
+✅ Test coverage calculation
+✅ TODO/FIXME extraction
+✅ Plan progress tracking
+✅ Commit history
+✅ Dashboard updates
+✅ GitHub synchronization
+✅ Real-time UI updates
+
+### What's Manual
+
+❌ Writing code
+❌ Creating plans
+❌ Configuring GitHub token
+❌ Reviewing changes
+❌ Merging PRs
+
+## Quick Reference
+
+### Essential Commands
+
+```bash
+pnpm dashboard:start    # Start automation
+pnpm dashboard:state    # View state
+pnpm github:sync        # Sync to GitHub
+pnpm github:test        # Test connection
+pnpm dev                # Start dev server
+pnpm test               # Run tests
+```
+
+### Essential URLs
+
+- Dashboard UI: http://localhost:3003
+- API: http://localhost:3001/api/stats
+- GitHub Repo: https://github.com/stoicfive/trendytradez-v2
+- Milestones: https://github.com/stoicfive/trendytradez-v2/milestones
+- Issues: https://github.com/stoicfive/trendytradez-v2/issues
+
+### Essential Files
+
+- `.env` - Configuration
+- `dashboard.db` - State database
+- `COMMANDS.md` - All commands
+- `QUICK_START.md` - Setup guide
+- `PROJECT_MANAGEMENT_SYSTEM.md` - Full system docs
+
+---
+
+**Last Updated**: October 27, 2025  
+**Version**: 2.0.0-alpha
