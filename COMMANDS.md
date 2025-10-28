@@ -297,6 +297,104 @@ pnpm outdated
 
 ---
 
+## Automated Dashboard Commands
+
+### Start Dashboard System
+
+```bash
+pnpm dashboard:start
+```
+
+**Description**: Start file watcher, analyzer, and servers  
+**When to use**: To monitor project in real-time  
+**Expected output**: All services running (ports 3001, 3002, 3003)
+
+### Run Analysis Once
+
+```bash
+pnpm dashboard:analyze
+```
+
+**Description**: Run code analysis without watching  
+**When to use**: To update dashboard state manually  
+**Expected output**: Analysis results and updated database
+
+### View Current State
+
+```bash
+pnpm dashboard:state
+```
+
+**Description**: View current project state from database  
+**When to use**: To check current metrics  
+**Expected output**: JSON with packages, plans, stats
+
+### View Dashboard Stats
+
+```bash
+node scripts/state-manager.js stats
+```
+
+**Description**: View dashboard statistics  
+**When to use**: To see summary metrics  
+**Expected output**: Package count, coverage, TODOs
+
+---
+
+## GitHub Integration Commands
+
+### Sync to GitHub
+
+```bash
+pnpm github:sync
+```
+
+**Description**: Full sync of packages and plans to GitHub  
+**When to use**: After major changes or initial setup  
+**Expected output**: Milestones and issues created on GitHub
+
+### Test GitHub Connection
+
+```bash
+pnpm github:test
+```
+
+**Description**: Test GitHub API connection  
+**When to use**: To verify token and permissions  
+**Expected output**: Connection status and rate limit
+
+### Start Webhook Server
+
+```bash
+pnpm github:webhooks
+```
+
+**Description**: Start webhook server for GitHub events  
+**When to use**: To receive GitHub updates locally  
+**Expected output**: Server running on port 3004
+
+### View GitHub Mappings
+
+```bash
+node scripts/github-db.js mappings
+```
+
+**Description**: View local to GitHub entity mappings  
+**When to use**: To see what's synced  
+**Expected output**: List of all mappings
+
+### View Sync Statistics
+
+```bash
+node scripts/github-db.js stats
+```
+
+**Description**: View GitHub sync statistics  
+**When to use**: To check sync health  
+**Expected output**: Total syncs, success rate, last sync time
+
+---
+
 ## Common Workflows
 
 ### Starting Development
@@ -314,6 +412,23 @@ pnpm lint
 pnpm type-check
 pnpm test
 pnpm format
+pnpm dashboard:analyze  # Update dashboard
+```
+
+### Starting Dashboard System
+
+```bash
+# Terminal 1: Backend services
+pnpm dashboard:start
+
+# Terminal 2: Webhook server (optional)
+pnpm github:webhooks
+
+# Terminal 3: Dashboard UI
+cd dashboard-app && npm run dev
+
+# One-time: Sync to GitHub
+pnpm github:sync
 ```
 
 ### Adding New Package
