@@ -8,6 +8,13 @@ import { PackageList } from './components/lists/PackageList';
 import { FileList } from './components/lists/FileList';
 import { PlanList } from './components/lists/PlanList';
 import { Button } from './components/ui/Button';
+import { HomePage } from './pages/HomePage';
+import { AnalyticsPage } from './pages/AnalyticsPage';
+import { SettingsPage } from './pages/SettingsPage';
+import { HelpPage } from './pages/HelpPage';
+import { IssuesTab } from './components/tabs/IssuesTab';
+import { PullRequestsTab } from './components/tabs/PullRequestsTab';
+import { ProjectsTab } from './components/tabs/ProjectsTab';
 import { useDashboardData } from './hooks/useDashboardData';
 
 const tabs = [
