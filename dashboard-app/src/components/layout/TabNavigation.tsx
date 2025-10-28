@@ -15,8 +15,8 @@ interface TabNavigationProps {
 
 export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationProps) {
   return (
-    <nav className="bg-white border-b border-neutral-200 px-6">
-      <div className="flex gap-6">
+    <div className="border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-6">
+      <nav className="flex gap-8">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -24,8 +24,8 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
             className={clsx(
               'flex items-center gap-2 py-3 border-b-2 transition-colors',
               activeTab === tab.id
-                ? 'border-primary-600 text-neutral-900 font-medium'
-                : 'border-transparent text-neutral-600 hover:text-neutral-900 hover:border-neutral-300'
+                ? 'border-primary-600 dark:border-primary-500 text-primary-600 dark:text-primary-400'
+                : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:border-neutral-300 dark:hover:border-neutral-600'
             )}
           >
             <span className="text-sm">{tab.label}</span>
@@ -36,7 +36,7 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
             )}
           </button>
         ))}
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }

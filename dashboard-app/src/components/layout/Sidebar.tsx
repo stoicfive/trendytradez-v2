@@ -26,7 +26,7 @@ const bottomItems: NavItem[] = [
 
 export function Sidebar({ activeItem = 'home', onItemClick }: SidebarProps) {
   return (
-    <aside className="fixed left-0 top-0 h-screen w-16 bg-primary-600 flex flex-col items-center py-4 z-50">
+    <aside className="fixed left-0 top-0 h-screen w-16 bg-primary-600 dark:bg-neutral-900 border-r border-primary-700 dark:border-neutral-800 flex flex-col items-center py-4 z-50">
       <SidebarLogo />
 
       <nav className="flex-1 flex flex-col gap-2">

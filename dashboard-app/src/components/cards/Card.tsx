@@ -22,9 +22,9 @@ export function Card({
   return (
     <div
       className={clsx(
-        'bg-white rounded-lg',
+        'bg-white dark:bg-neutral-800 rounded-lg',
         {
-          'border border-neutral-200': border,
+          'border border-neutral-200 dark:border-neutral-700': border,
           'shadow-sm': shadow === 'sm',
           'shadow-md': shadow === 'md',
           'shadow-lg': shadow === 'lg',
@@ -33,8 +33,8 @@ export function Card({
       )}
     >
       {(title || actions) && (
-        <div className="flex items-center justify-between border-b border-neutral-200 px-6 py-4">
-          {title && <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>}
+        <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-700 px-6 py-4">
+          {title && <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">{title}</h3>}
           {actions && <div className="flex items-center gap-2">{actions}</div>}
         </div>
       )}

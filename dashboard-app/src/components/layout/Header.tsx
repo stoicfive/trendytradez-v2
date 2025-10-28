@@ -51,22 +51,22 @@ export function Header({ title, isConnected }: HeaderProps) {
   };
 
   return (
-    <header className="bg-white border-b border-neutral-200 px-6 py-4">
+    <header className="bg-white dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-700 px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-semibold text-neutral-900">{title}</h1>
+              <h1 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">{title}</h1>
               <Badge variant="default" size="sm">
                 v4.2 Beta
               </Badge>
             </div>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-sm text-neutral-600">Figma</span>
-              <span className="text-neutral-300">/</span>
-              <span className="text-sm text-neutral-600">Projects</span>
-              <span className="text-neutral-300">/</span>
-              <span className="text-sm font-medium text-neutral-900">Public Repo</span>
+              <span className="text-sm text-neutral-600 dark:text-neutral-400">Figma</span>
+              <span className="text-neutral-300 dark:text-neutral-600">/</span>
+              <span className="text-sm text-neutral-600 dark:text-neutral-400">Projects</span>
+              <span className="text-neutral-300 dark:text-neutral-600">/</span>
+              <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100">Public Repo</span>
             </div>
           </div>
         </div>
