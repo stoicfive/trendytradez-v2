@@ -12,20 +12,25 @@ export const PlanList = memo(function PlanList({ plans }: PlanListProps) {
       {plans.map((plan) => (
         <div
           key={plan.id || plan.name}
-          className="bg-white border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+          className="p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg bg-neutral-50 dark:bg-neutral-800/50"
         >
-          <h4 className="font-semibold text-neutral-900 mb-3">{plan.name}</h4>
-          <ProgressBar
-            value={plan.progress}
-            max={100}
-            height="md"
-            color="bg-primary-600"
-          />
-          <div className="mt-2 flex items-center justify-between text-sm">
-            <span className="text-neutral-600">
-              {plan.completed} / {plan.total} tasks
-            </span>
-            <span className="font-medium text-neutral-900">{plan.progress}%</span>
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="font-medium text-neutral-900 dark:text-neutral-100">{plan.name}</h4>
+            <span className="text-sm font-semibold text-primary-600 dark:text-primary-400">{plan.progress}%</span>
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-neutral-600 dark:text-neutral-400">Progress</span>
+              <span className="text-neutral-900 dark:text-neutral-100">
+                {plan.completed} / {plan.total} tasks
+              </span>
+            </div>
+            <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
+              <div
+                className="bg-primary-600 dark:bg-primary-500 h-2 rounded-full transition-all"
+                style={{ width: `${plan.progress}%` }}
+              />
+            </div>
           </div>
         </div>
       ))}

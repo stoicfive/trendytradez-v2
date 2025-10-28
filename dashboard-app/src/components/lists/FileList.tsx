@@ -20,18 +20,16 @@ export const FileList = memo(function FileList({ items, onItemClick }: FileListP
       {items.map((item, index) => (
         <div
           key={item.id || `${item.name}-${index}`}
-          onClick={() => onItemClick?.(item)}
-          className={clsx(
-            'flex items-start gap-3 py-3 px-4',
-            onItemClick && 'cursor-pointer hover:bg-neutral-50 transition-colors'
-          )}
+          className="flex items-center gap-3 p-3 hover:bg-neutral-50 dark:hover:bg-neutral-700 rounded-lg transition-colors cursor-pointer"
         >
           {item.icon && (
             <div className="flex-shrink-0 text-neutral-400 mt-0.5">{item.icon}</div>
           )}
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-neutral-900 truncate">{item.name}</p>
-            <p className="text-sm text-neutral-600 truncate">{item.description}</p>
+          <div className="flex-1">
+            <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">{item.name}</p>
+            {item.description && (
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{item.description}</p>
+            )}
           </div>
           {item.meta && (
             <div className="flex-shrink-0 text-xs text-neutral-500">{item.meta}</div>

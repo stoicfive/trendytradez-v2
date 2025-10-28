@@ -34,16 +34,21 @@ export const PackageList = memo(function PackageList({ packages }: PackageListPr
       {packages.map((pkg) => (
         <div
           key={pkg.id || pkg.name}
-          className="bg-white border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+          className="p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg bg-neutral-50 dark:bg-neutral-800/50"
         >
-          <h4 className="font-semibold text-neutral-900 mb-1">{pkg.name}</h4>
-          <p className="text-sm text-neutral-600 mb-3 line-clamp-2">{pkg.description}</p>
+          <div className="flex items-center justify-between mb-2">
+            <h4 className="font-medium text-neutral-900 dark:text-neutral-100">{pkg.name}</h4>
+            <Badge variant={getStatusVariant(pkg.status)} size="sm">
+              {getStatusLabel(pkg.status)}
+            </Badge>
+          </div>
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-3 line-clamp-2">{pkg.description}</p>
           <div className="flex items-center justify-between">
             <Badge variant={getStatusVariant(pkg.status)} size="sm">
               {getStatusLabel(pkg.status)}
             </Badge>
             {pkg.version && (
-              <span className="text-xs text-neutral-500">{pkg.version}</span>
+              <span className="text-xs text-neutral-500 dark:text-neutral-400">{pkg.version}</span>
             )}
           </div>
         </div>
