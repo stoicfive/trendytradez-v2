@@ -9,6 +9,7 @@ export interface DashboardState {
 }
 
 export interface Package {
+  id?: string;
   name: string;
   description: string;
   version?: string;
@@ -16,6 +17,7 @@ export interface Package {
 }
 
 export interface Commit {
+  id?: string;
   hash: string;
   message: string;
   date: string;
@@ -28,6 +30,7 @@ export interface Stats {
 }
 
 export interface Todo {
+  id?: string;
   type: 'TODO' | 'FIXME';
   file: string;
   line: number;
@@ -35,6 +38,7 @@ export interface Todo {
 }
 
 export interface Plan {
+  id?: string;
   name: string;
   progress: number;
   completed: number;

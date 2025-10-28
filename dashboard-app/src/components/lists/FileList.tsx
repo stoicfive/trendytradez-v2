@@ -1,6 +1,8 @@
+import { memo } from 'react';
 import clsx from 'clsx';
 
 export interface FileItem {
+  id?: string;
   icon?: React.ReactNode;
   name: string;
   description: string;
@@ -12,12 +14,12 @@ interface FileListProps {
   onItemClick?: (item: FileItem) => void;
 }
 
-export function FileList({ items, onItemClick }: FileListProps) {
+export const FileList = memo(function FileList({ items, onItemClick }: FileListProps) {
   return (
     <div className="divide-y divide-neutral-200">
       {items.map((item, index) => (
         <div
-          key={index}
+          key={item.id || `${item.name}-${index}`}
           onClick={() => onItemClick?.(item)}
           className={clsx(
             'flex items-start gap-3 py-3 px-4',
@@ -38,4 +40,4 @@ export function FileList({ items, onItemClick }: FileListProps) {
       ))}
     </div>
   );
-}
+});

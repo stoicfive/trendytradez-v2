@@ -1,6 +1,6 @@
 import { useWebSocket } from './useWebSocket';
 
-const WS_URL = 'ws://localhost:3002';
+const WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:3002';
 
 export function useDashboardData() {
   const { state, isConnected, error } = useWebSocket(WS_URL);

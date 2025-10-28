@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { ProgressBar } from '../ui/ProgressBar';
 import type { Plan } from '../../types/dashboard';
 
@@ -5,12 +6,12 @@ interface PlanListProps {
   plans: Plan[];
 }
 
-export function PlanList({ plans }: PlanListProps) {
+export const PlanList = memo(function PlanList({ plans }: PlanListProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {plans.map((plan) => (
         <div
-          key={plan.name}
+          key={plan.id || plan.name}
           className="bg-white border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow"
         >
           <h4 className="font-semibold text-neutral-900 mb-3">{plan.name}</h4>
@@ -30,4 +31,4 @@ export function PlanList({ plans }: PlanListProps) {
       ))}
     </div>
   );
-}
+});

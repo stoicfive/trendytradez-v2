@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SearchInput } from '../ui/SearchInput';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
@@ -8,6 +9,12 @@ interface HeaderProps {
 }
 
 export function Header({ title, isConnected }: HeaderProps) {
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = (value: string) => {
+    console.log('Search:', value);
+  };
+
   return (
     <header className="bg-white border-b border-neutral-200 px-6 py-4">
       <div className="flex items-center justify-between">
@@ -32,8 +39,9 @@ export function Header({ title, isConnected }: HeaderProps) {
         <div className="flex items-center gap-4">
           <SearchInput
             placeholder="Search..."
-            value=""
-            onChange={() => {}}
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            onSubmit={handleSearch}
             className="w-64"
           />
           {isConnected && (

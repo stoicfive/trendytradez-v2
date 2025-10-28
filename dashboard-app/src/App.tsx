@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { TabNavigation } from './components/layout/TabNavigation';
@@ -53,10 +53,15 @@ function App() {
     );
   }
 
-  const commitItems = commits.map((commit) => ({
-    name: commit.message,
-    description: `${commit.hash.substring(0, 7)} • ${commit.date}`,
-  }));
+  const commitItems = useMemo(
+    () =>
+      commits.map((commit, index) => ({
+        id: commit.id || commit.hash,
+        name: commit.message,
+        description: `${commit.hash.substring(0, 7)} • ${commit.date}`,
+      })),
+    [commits]
+  );
 
   return (
     <div className="min-h-screen bg-neutral-50">

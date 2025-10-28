@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Badge } from '../ui/Badge';
 import type { Package } from '../../types/dashboard';
 
@@ -5,7 +6,7 @@ interface PackageListProps {
   packages: Package[];
 }
 
-export function PackageList({ packages }: PackageListProps) {
+export const PackageList = memo(function PackageList({ packages }: PackageListProps) {
   const getStatusVariant = (status: Package['status']) => {
     switch (status) {
       case 'complete':
@@ -32,7 +33,7 @@ export function PackageList({ packages }: PackageListProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {packages.map((pkg) => (
         <div
-          key={pkg.name}
+          key={pkg.id || pkg.name}
           className="bg-white border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow"
         >
           <h4 className="font-semibold text-neutral-900 mb-1">{pkg.name}</h4>
@@ -49,4 +50,4 @@ export function PackageList({ packages }: PackageListProps) {
       ))}
     </div>
   );
-}
+});
