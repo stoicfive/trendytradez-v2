@@ -1,357 +1,168 @@
-import { useWebSocket } from './hooks/useWebSocket';
+import { useState } from 'react';
+import { Sidebar } from './components/layout/Sidebar';
+import { Header } from './components/layout/Header';
+import { TabNavigation } from './components/layout/TabNavigation';
+import { StatsGrid } from './components/sections/StatsGrid';
+import { Card } from './components/cards/Card';
+import { PackageList } from './components/lists/PackageList';
+import { FileList } from './components/lists/FileList';
+import { PlanList } from './components/lists/PlanList';
+import { Button } from './components/ui/Button';
+import { useDashboardData } from './hooks/useDashboardData';
 
-const WS_URL = 'ws://localhost:3002';
+const tabs = [
+  { id: 'code', label: 'Code' },
+  { id: 'issues', label: 'Issues', count: 12 },
+  { id: 'pull-requests', label: 'Pull Requests', count: 7 },
+  { id: 'projects', label: 'Projects' },
+];
 
 function App() {
-  const { state, isConnected, error } = useWebSocket(WS_URL);
+  const [activeTab, setActiveTab] = useState('code');
+  const { stats, packages, commits, plans, todos, github, isConnected, error } =
+    useDashboardData();
 
   if (error) {
     return (
-      <div style={{ padding: '20px', color: '#f85149' }}>
-        <h1>Connection Error</h1>
-        <p>{error}</p>
-        <p>Make sure the server is running: <code>pnpm dashboard:start</code></p>
+      <div className="min-h-screen flex items-center justify-center bg-neutral-50">
+        <Card className="max-w-md">
+          <div className="text-center">
+            <h1 className="text-xl font-semibold text-error mb-2">Connection Error</h1>
+            <p className="text-neutral-600 mb-4">{error}</p>
+            <p className="text-sm text-neutral-500">
+              Make sure the server is running: <code>pnpm dashboard:start</code>
+            </p>
+          </div>
+        </Card>
       </div>
     );
   }
 
-  if (!isConnected || !state) {
+  if (!isConnected) {
     return (
-      <div style={{ padding: '20px' }}>
-        <h1>Connecting...</h1>
-        <p>Connecting to dashboard server at {WS_URL}</p>
+      <div className="min-h-screen flex items-center justify-center bg-neutral-50">
+        <Card className="max-w-md">
+          <div className="text-center">
+            <h1 className="text-xl font-semibold text-neutral-900 mb-2">Connecting...</h1>
+            <p className="text-neutral-600">
+              Connecting to dashboard server at ws://localhost:3002
+            </p>
+          </div>
+        </Card>
       </div>
     );
   }
 
-  const { packages, commits, stats, todos, plans, github } = state;
+  const commitItems = commits.map((commit) => ({
+    name: commit.message,
+    description: `${commit.hash.substring(0, 7)} • ${commit.date}`,
+  }));
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      background: '#0d1117', 
-      color: '#e6edf3',
-      padding: '20px',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-    }}>
-      <header style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ color: '#58a6ff', marginBottom: '10px' }}>
-            TrendyTradez v2 - Automated Dashboard
-          </h1>
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-            <div style={{ 
-              display: 'inline-block', 
-              padding: '4px 12px', 
-              background: '#238636', 
-              borderRadius: '12px',
-              fontSize: '14px'
-            }}>
-              ● Connected
+    <div className="min-h-screen bg-neutral-50">
+      <Sidebar activeItem="home" />
+
+      <div className="ml-16">
+        <Header title="TrendyTradez v2" isConnected={isConnected} />
+        <TabNavigation tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+
+        <main className="p-6 max-w-[1600px] mx-auto">
+          <div className="mb-6">
+            <StatsGrid
+              stats={stats}
+              github={github}
+              todosCount={todos.length}
+              plansCount={plans.length}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div className="lg:col-span-2 space-y-6">
+              <Card title="Packages" padding="none">
+                <div className="p-6">
+                  <PackageList packages={packages} />
+                </div>
+              </Card>
+
+              <Card title="Recent Commits" padding="none">
+                <FileList items={commitItems} />
+              </Card>
             </div>
-            {github?.lastSync && (
-              <div style={{ 
-                fontSize: '12px', 
-                color: '#8b949e' 
-              }}>
-                Last sync: {new Date(github.lastSync).toLocaleTimeString()}
-              </div>
-            )}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <a 
-            href="https://github.com/stoicfive/trendytradez-v2" 
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              padding: '8px 16px',
-              background: '#21262d',
-              border: '1px solid #30363d',
-              borderRadius: '6px',
-              color: '#e6edf3',
-              textDecoration: 'none',
-              fontSize: '14px'
-            }}
-          >
-            📦 Repository
-          </a>
-          <a 
-            href="https://github.com/stoicfive?tab=projects" 
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              padding: '8px 16px',
-              background: '#21262d',
-              border: '1px solid #30363d',
-              borderRadius: '6px',
-              color: '#e6edf3',
-              textDecoration: 'none',
-              fontSize: '14px'
-            }}
-          >
-            📋 Projects
-          </a>
-        </div>
-      </header>
 
-      {/* Stats */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '20px',
-        marginBottom: '30px'
-      }}>
-        <div style={{ 
-          background: '#161b22', 
-          padding: '20px', 
-          borderRadius: '8px',
-          border: '1px solid #30363d'
-        }}>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#58a6ff' }}>
-            {stats.completePackages}/{stats.totalPackages}
-          </div>
-          <div style={{ color: '#8b949e', fontSize: '14px' }}>Packages Complete</div>
-        </div>
+            <div className="space-y-6">
+              <Card title="About">
+                <p className="text-sm text-neutral-600 mb-4">
+                  This is a repository template created by TrendyTradez v2
+                </p>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="w-4 h-4 text-neutral-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                      />
+                    </svg>
+                    <a
+                      href="https://github.com/stoicfive/trendytradez-v2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary-600 hover:underline"
+                    >
+                      github.com/stoicfive/trendytradez-v2
+                    </a>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-neutral-200">
+                  <Button variant="primary" className="w-full">
+                    View on GitHub
+                  </Button>
+                </div>
+              </Card>
 
-        <div style={{ 
-          background: '#161b22', 
-          padding: '20px', 
-          borderRadius: '8px',
-          border: '1px solid #30363d'
-        }}>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#58a6ff' }}>
-            {stats.testCoverage}%
+              {github && (
+                <Card title="GitHub Integration">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-neutral-600">Projects</span>
+                      <span className="font-semibold text-neutral-900">{github.projects}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-neutral-600">Issues</span>
+                      <span className="font-semibold text-neutral-900">{github.issues}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-neutral-600">Milestones</span>
+                      <span className="font-semibold text-neutral-900">
+                        {github.milestones}
+                      </span>
+                    </div>
+                    {github.lastSync && (
+                      <div className="pt-3 border-t border-neutral-200">
+                        <p className="text-xs text-neutral-500">
+                          Last sync: {new Date(github.lastSync).toLocaleString()}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              )}
+            </div>
           </div>
-          <div style={{ color: '#8b949e', fontSize: '14px' }}>Test Coverage</div>
-        </div>
 
-        <div style={{ 
-          background: '#161b22', 
-          padding: '20px', 
-          borderRadius: '8px',
-          border: '1px solid #30363d'
-        }}>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#58a6ff' }}>
-            {todos.length}
-          </div>
-          <div style={{ color: '#8b949e', fontSize: '14px' }}>TODOs</div>
-        </div>
-
-        <div style={{ 
-          background: '#161b22', 
-          padding: '20px', 
-          borderRadius: '8px',
-          border: '1px solid #30363d'
-        }}>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#58a6ff' }}>
-            {plans.length}
-          </div>
-          <div style={{ color: '#8b949e', fontSize: '14px' }}>Plans</div>
-        </div>
-
-        <div style={{ 
-          background: '#161b22', 
-          padding: '20px', 
-          borderRadius: '8px',
-          border: '1px solid #30363d'
-        }}>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#58a6ff' }}>
-            {github?.projects || 0}
-          </div>
-          <div style={{ color: '#8b949e', fontSize: '14px' }}>GitHub Projects</div>
-        </div>
-
-        <div style={{ 
-          background: '#161b22', 
-          padding: '20px', 
-          borderRadius: '8px',
-          border: '1px solid #30363d'
-        }}>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#58a6ff' }}>
-            {github?.issues || 0}
-          </div>
-          <div style={{ color: '#8b949e', fontSize: '14px' }}>GitHub Issues</div>
-        </div>
+          <Card title="Implementation Plans" padding="none">
+            <div className="p-6">
+              <PlanList plans={plans} />
+            </div>
+          </Card>
+        </main>
       </div>
-
-      {/* Packages */}
-      <section style={{ marginBottom: '30px' }}>
-        <h2 style={{ color: '#58a6ff', marginBottom: '15px' }}>Packages</h2>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          gap: '15px'
-        }}>
-          {packages.map((pkg) => (
-            <div key={pkg.name} style={{
-              background: '#161b22',
-              padding: '15px',
-              borderRadius: '8px',
-              border: '1px solid #30363d'
-            }}>
-              <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>{pkg.name}</div>
-              <div style={{ fontSize: '14px', color: '#8b949e', marginBottom: '10px' }}>
-                {pkg.description}
-              </div>
-              <span style={{
-                display: 'inline-block',
-                padding: '4px 8px',
-                borderRadius: '6px',
-                fontSize: '12px',
-                background: pkg.status === 'complete' ? '#238636' : 
-                           pkg.status === 'in-progress' ? '#1f6feb' : '#6e7681',
-                color: 'white'
-              }}>
-                {pkg.status}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Recent Commits */}
-      <section style={{ marginBottom: '30px' }}>
-        <h2 style={{ color: '#58a6ff', marginBottom: '15px' }}>Recent Commits</h2>
-        <div style={{ 
-          background: '#161b22', 
-          borderRadius: '8px',
-          border: '1px solid #30363d',
-          overflow: 'hidden'
-        }}>
-          {commits.slice(0, 5).map((commit, index) => (
-            <div key={commit.hash} style={{
-              padding: '15px',
-              borderBottom: index < 4 ? '1px solid #30363d' : 'none'
-            }}>
-              <div style={{ marginBottom: '5px' }}>{commit.message}</div>
-              <div style={{ fontSize: '12px', color: '#8b949e' }}>
-                {commit.date} • {commit.hash}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Plans */}
-      <section style={{ marginBottom: '30px' }}>
-        <h2 style={{ color: '#58a6ff', marginBottom: '15px' }}>Implementation Plans</h2>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-          gap: '15px'
-        }}>
-          {plans.map((plan) => (
-            <div key={plan.name} style={{
-              background: '#161b22',
-              padding: '15px',
-              borderRadius: '8px',
-              border: '1px solid #30363d'
-            }}>
-              <div style={{ fontWeight: 'bold', marginBottom: '10px' }}>{plan.name}</div>
-              <div style={{ marginBottom: '8px' }}>
-                <div style={{ 
-                  height: '8px', 
-                  background: '#21262d', 
-                  borderRadius: '4px',
-                  overflow: 'hidden'
-                }}>
-                  <div style={{
-                    height: '100%',
-                    width: `${plan.progress}%`,
-                    background: '#238636',
-                    transition: 'width 0.3s'
-                  }} />
-                </div>
-              </div>
-              <div style={{ fontSize: '12px', color: '#8b949e' }}>
-                {plan.completed}/{plan.total} tasks • {plan.progress}%
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* GitHub Integration */}
-      {github && (
-        <section style={{ marginBottom: '30px' }}>
-          <h2 style={{ color: '#58a6ff', marginBottom: '15px' }}>GitHub Integration</h2>
-          <div style={{
-            background: '#161b22',
-            padding: '20px',
-            borderRadius: '8px',
-            border: '1px solid #30363d'
-          }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '20px' }}>
-              <div>
-                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#58a6ff', marginBottom: '5px' }}>
-                  {github.projects}
-                </div>
-                <div style={{ fontSize: '14px', color: '#8b949e' }}>Projects Created</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#58a6ff', marginBottom: '5px' }}>
-                  {github.issues}
-                </div>
-                <div style={{ fontSize: '14px', color: '#8b949e' }}>Issues Synced</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#58a6ff', marginBottom: '5px' }}>
-                  {github.milestones}
-                </div>
-                <div style={{ fontSize: '14px', color: '#8b949e' }}>Milestones</div>
-              </div>
-              <div>
-                <div style={{ 
-                  fontSize: '14px', 
-                  fontWeight: 'bold',
-                  color: github.syncStatus === 'success' ? '#3fb950' : '#f85149',
-                  marginBottom: '5px'
-                }}>
-                  {github.syncStatus === 'success' ? '✓ Synced' : '✗ Failed'}
-                </div>
-                <div style={{ fontSize: '12px', color: '#8b949e' }}>
-                  {github.lastSync ? new Date(github.lastSync).toLocaleString() : 'Never'}
-                </div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <a 
-                href="https://github.com/stoicfive/trendytradez-v2/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  padding: '8px 16px',
-                  background: '#238636',
-                  borderRadius: '6px',
-                  color: 'white',
-                  textDecoration: 'none',
-                  fontSize: '14px',
-                  display: 'inline-block'
-                }}
-              >
-                View Issues →
-              </a>
-              <a 
-                href="https://github.com/stoicfive?tab=projects"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  padding: '8px 16px',
-                  background: '#238636',
-                  borderRadius: '6px',
-                  color: 'white',
-                  textDecoration: 'none',
-                  fontSize: '14px',
-                  display: 'inline-block'
-                }}
-              >
-                View Projects →
-              </a>
-            </div>
-          </div>
-        </section>
-      )}
     </div>
   );
 }
