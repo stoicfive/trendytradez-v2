@@ -9,6 +9,7 @@ const { analyzeProject } = require('./analyzer');
 const { updateState, getState } = require('./state-manager');
 const { broadcastUpdate } = require('./server');
 const { syncGitHubStatus } = require('./sync-github-status');
+const { refreshProjectStatus } = require('./refresh-project-status');
 
 let isAnalyzing = false;
 
@@ -29,6 +30,9 @@ async function runAnalysis() {
     
     console.log('💾 Updating state...');
     updateState(analysis);
+    
+    console.log('🔄 Refreshing GitHub Projects...');
+    await refreshProjectStatus();
     
     console.log('🔄 Syncing GitHub status...');
     await syncGitHubStatus();

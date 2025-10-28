@@ -1,17 +1,15 @@
 #!/usr/bin/env node
 /**
  * Sync GitHub Status Back to Dashboard
- * Pulls issue states from GitHub and updates plan progress
+ * Pulls GitHub Projects status and updates plan progress
  */
 
 require('dotenv').config();
-const { getGitHubService } = require('./github-service');
 const { getDatabase } = require('./state-manager');
 
 async function syncGitHubStatus() {
-  console.log('Syncing GitHub status to dashboard...\n');
+  console.log('Syncing GitHub Projects status to dashboard...\n');
   
-  const github = getGitHubService();
   const db = getDatabase();
   
   try {
@@ -24,12 +22,16 @@ async function syncGitHubStatus() {
     `).all();
     
     for (const { plan_name } of plans) {
-      // Get all tasks for this plan
+      // Get all tasks for this plan with their GitHub Projects status
       const tasks = db.prepare(`
-        SELECT local_id, github_id 
-        FROM github_mappings 
-        WHERE local_type = 'task' 
-        AND local_id LIKE ?
+        SELECT 
+          gm.local_id, 
+          gm.github_id,
+          gpi.status
+        FROM github_mappings gm
+        LEFT JOIN github_project_items gpi ON gm.github_id = gpi.issue_id
+        WHERE gm.local_type = 'task' 
+        AND gm.local_id LIKE ?
       `).all(`${plan_name}:%`);
       
       if (tasks.length === 0) continue;
@@ -37,15 +39,10 @@ async function syncGitHubStatus() {
       let completed = 0;
       const total = tasks.length;
       
-      // Check each task's GitHub status
+      // Count tasks with "Done" status in GitHub Projects
       for (const task of tasks) {
-        try {
-          const issue = await github.getIssue(task.github_id);
-          if (issue.state === 'closed') {
-            completed++;
-          }
-        } catch (error) {
-          console.error(`Error fetching issue #${task.github_id}:`, error.message);
+        if (task.status === 'Done') {
+          completed++;
         }
       }
       
