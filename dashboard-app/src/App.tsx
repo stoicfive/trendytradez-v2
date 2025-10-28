@@ -18,6 +18,7 @@ const tabs = [
 ];
 
 function App() {
+  const [activePage, setActivePage] = useState('home');
   const [activeTab, setActiveTab] = useState('code');
   const { stats, packages, commits, plans, todos, github, isConnected, error } =
     useDashboardData();
@@ -67,16 +68,24 @@ function App() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-neutral-50">
-      <Sidebar activeItem="home" onItemClick={(id) => console.log('Sidebar clicked:', id)} />
+  const dashboardData = { stats, packages, commits, plans, todos, github, isConnected };
 
-      <div className="ml-16">
-        <Header title="TrendyTradez v2" isConnected={isConnected} />
-        <TabNavigation tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
-
-        <main className="p-6 max-w-[1600px] mx-auto">
-          {activeTab === 'code' && (
+  const renderContent = () => {
+    switch (activePage) {
+      case 'home':
+        return <HomePage data={dashboardData} />;
+      case 'analytics':
+        return <AnalyticsPage />;
+      case 'settings':
+        return <SettingsPage />;
+      case 'help':
+        return <HelpPage />;
+      case 'code':
+        return (
+          <>
+            <TabNavigation tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+            <div className="mt-6">
+              {activeTab === 'code' && (
             <>
               <div className="mb-6">
                 <StatsGrid
@@ -174,9 +183,26 @@ function App() {
           </Card>
             </>
           )}
-          {activeTab === 'issues' && <IssuesTab issueCount={github?.issues} />}
-          {activeTab === 'pull-requests' && <PullRequestsTab />}
-          {activeTab === 'projects' && <ProjectsTab projectCount={github?.projects} />}
+              {activeTab === 'issues' && <IssuesTab issueCount={github?.issues} />}
+              {activeTab === 'pull-requests' && <PullRequestsTab />}
+              {activeTab === 'projects' && <ProjectsTab projectCount={github?.projects} />}
+            </div>
+          </>
+        );
+      default:
+        return <HomePage data={dashboardData} />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-neutral-50">
+      <Sidebar activeItem={activePage} onItemClick={setActivePage} />
+
+      <div className="ml-16">
+        <Header title="TrendyTradez v2" isConnected={isConnected} />
+        
+        <main className="p-6 max-w-[1600px] mx-auto">
+          {renderContent()}
         </main>
       </div>
     </div>
