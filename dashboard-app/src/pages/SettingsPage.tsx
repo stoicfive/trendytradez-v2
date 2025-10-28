@@ -1,24 +1,31 @@
 import { Card } from '../components/cards/Card';
 import { Button } from '../components/ui/Button';
+import { useTheme } from '../contexts/ThemeContext';
 
 export function SettingsPage() {
+  const { theme, setTheme } = useTheme();
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-900 mb-2">Settings</h1>
-        <p className="text-neutral-600">Configure your dashboard preferences</p>
+        <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">Settings</h1>
+        <p className="text-neutral-600 dark:text-neutral-400">Configure your dashboard preferences</p>
       </div>
 
       <Card title="General Settings">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-2">
+            <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Dashboard Theme
             </label>
-            <select className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
-              <option>Light</option>
-              <option>Dark</option>
-              <option>Auto</option>
+            <select 
+              value={theme}
+              onChange={(e) => setTheme(e.target.value as 'light' | 'dark' | 'auto')}
+              className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
+            >
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="auto">Auto</option>
             </select>
           </div>
 
