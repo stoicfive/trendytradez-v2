@@ -79,10 +79,10 @@ export function AnalyticsPage({ data }: AnalyticsPageProps) {
         <div className="p-6">
           <div className="space-y-3">
             {commits.slice(0, 5).map((commit, index) => (
-              <div key={commit.id || index} className="flex items-start gap-3 pb-3 border-b border-neutral-100 last:border-0">
+              <div key={commit.id || index} className="flex items-start gap-3 pb-3 border-b border-neutral-100 dark:border-neutral-700 last:border-0">
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-neutral-900">{commit.message}</p>
-                  <p className="text-xs text-neutral-500 mt-1">
+                  <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">{commit.message}</p>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
                     {commit.hash.substring(0, 7)} • {commit.date}
                   </p>
                 </div>

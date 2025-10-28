@@ -35,16 +35,17 @@ export function SearchInput({
         />
       </svg>
       <input
-        type="search"
-        placeholder={placeholder}
+        type="text"
         value={value}
         onChange={onChange}
         onKeyDown={handleKeyDown}
+        placeholder={placeholder}
         className={clsx(
-          'w-full pl-10 pr-4 py-2 text-sm',
-          'bg-neutral-50 border border-neutral-200 rounded-md',
+          'w-full pl-10 pr-4 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md',
+          'bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100',
+          'placeholder:text-neutral-500 dark:placeholder:text-neutral-400',
           'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent',
-          'placeholder:text-neutral-400'
+          className
         )}
         {...props}
       />
