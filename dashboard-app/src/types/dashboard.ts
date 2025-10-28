@@ -1,11 +1,21 @@
 export interface DashboardState {
+  stats: Stats;
   packages: Package[];
   commits: Commit[];
-  stats: Stats;
   todos: Todo[];
   plans: Plan[];
   github?: GitHubData;
   lastUpdated: string;
+}
+
+export interface DashboardData {
+  stats: Stats;
+  packages: Package[];
+  commits: Commit[];
+  todos: Todo[];
+  plans: Plan[];
+  github?: GitHubData;
+  isConnected: boolean;
 }
 
 export interface Package {
