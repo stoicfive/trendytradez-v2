@@ -16,7 +16,7 @@
   .dark {
     /* Dark mode colors */
     --color-text-primary: 250 250 250; /* neutral-50 */
-    --color-text-secondary: 212 212 212; /* neutral-300 */
+    --color-text-secondary: 229 229 229; /* neutral-200 - lighter for better contrast */
     --color-text-tertiary: 163 163 163; /* neutral-400 */
     --color-bg-primary: 38 38 38; /* neutral-800 */
     --color-bg-secondary: 23 23 23; /* neutral-900 */
@@ -31,7 +31,7 @@
   }
   
   .text-secondary {
-    @apply text-neutral-600 dark:text-neutral-300;
+    @apply text-neutral-600 dark:text-neutral-200;
   }
   
   .text-tertiary {
