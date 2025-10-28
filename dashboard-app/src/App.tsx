@@ -172,6 +172,11 @@ function App() {
               <PlanList plans={plans} />
             </div>
           </Card>
+            </>
+          )}
+          {activeTab === 'issues' && <IssuesTab issueCount={github?.issues} />}
+          {activeTab === 'pull-requests' && <PullRequestsTab />}
+          {activeTab === 'projects' && <ProjectsTab projectCount={github?.projects} />}
         </main>
       </div>
     </div>
