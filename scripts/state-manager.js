@@ -192,9 +192,9 @@ function getState() {
 
     // Get GitHub stats
     const githubProjects = db.prepare('SELECT COUNT(*) as count FROM github_projects').get();
-    const githubMappings = db.prepare('SELECT COUNT(*) as count FROM github_mappings WHERE github_type = "issue"').get();
-    const githubMilestones = db.prepare('SELECT COUNT(*) as count FROM github_mappings WHERE github_type = "milestone"').get();
-    const lastSync = db.prepare('SELECT MAX(timestamp) as last FROM github_sync_log WHERE status = "success"').get();
+    const githubMappings = db.prepare("SELECT COUNT(*) as count FROM github_mappings WHERE github_type = 'issue'").get();
+    const githubMilestones = db.prepare("SELECT COUNT(*) as count FROM github_mappings WHERE github_type = 'milestone'").get();
+    const lastSync = db.prepare("SELECT MAX(timestamp) as last FROM github_sync_log WHERE status = 'success'").get();
 
     // Convert meta array to object
     const metaObj = {};
