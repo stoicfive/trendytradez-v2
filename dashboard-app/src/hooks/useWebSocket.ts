@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
+interface GitHubData {
+  projects: number;
+  issues: number;
+  milestones: number;
+  lastSync?: string;
+  syncStatus?: 'success' | 'failed';
+}
+
 interface DashboardState {
   packages: any[];
   commits: any[];
@@ -11,6 +19,7 @@ interface DashboardState {
     completePackages: number;
     testCoverage: number;
   };
+  github?: GitHubData;
 }
 
 export function useWebSocket(url: string) {
