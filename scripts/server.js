@@ -80,33 +80,41 @@ app.get('/api/plans', (req, res) => {
 // Create HTTP server
 const server = http.createServer(app);
 
-// Create WebSocket server
-const wss = new WebSocketServer({ port: WS_PORT });
+// WebSocket server (only created when module is run directly)
+let wss;
+let clients = new Set();
 
-const clients = new Set();
+function initializeWebSocket() {
+  if (wss) return wss;
+  
+  wss = new WebSocketServer({ port: WS_PORT });
+  clients = new Set();
+  
+  wss.on('connection', (ws) => {
+    console.log('📱 Client connected');
+    clients.add(ws);
 
-wss.on('connection', (ws) => {
-  console.log('📱 Client connected');
-  clients.add(ws);
+    // Send initial state
+    try {
+      const state = getState();
+      ws.send(JSON.stringify({ type: 'initial', data: state }));
+    } catch (error) {
+      console.error('Error sending initial state:', error);
+    }
 
-  // Send initial state
-  try {
-    const state = getState();
-    ws.send(JSON.stringify({ type: 'initial', data: state }));
-  } catch (error) {
-    console.error('Error sending initial state:', error);
-  }
+    ws.on('close', () => {
+      console.log('📱 Client disconnected');
+      clients.delete(ws);
+    });
 
-  ws.on('close', () => {
-    console.log('📱 Client disconnected');
-    clients.delete(ws);
+    ws.on('error', (error) => {
+      console.error('WebSocket error:', error);
+      clients.delete(ws);
+    });
   });
-
-  ws.on('error', (error) => {
-    console.error('WebSocket error:', error);
-    clients.delete(ws);
-  });
-});
+  
+  return wss;
+}
 
 /**
  * Broadcast state update to all connected clients
@@ -131,6 +139,9 @@ function broadcastUpdate(data) {
  * Start server
  */
 function startServer() {
+  // Initialize WebSocket
+  initializeWebSocket();
+  
   server.listen(PORT, () => {
     console.log(`🚀 REST API server running on http://localhost:${PORT}`);
     console.log(`🔌 WebSocket server running on ws://localhost:${WS_PORT}`);
@@ -149,13 +160,15 @@ function startServer() {
   process.on('SIGINT', () => {
     console.log('\n\n🛑 Shutting down servers...');
     
-    wss.clients.forEach((client) => {
-      client.close();
-    });
-    
-    wss.close(() => {
-      console.log('✅ WebSocket server closed');
-    });
+    if (wss) {
+      wss.clients.forEach((client) => {
+        client.close();
+      });
+      
+      wss.close(() => {
+        console.log('✅ WebSocket server closed');
+      });
+    }
 
     server.close(() => {
       console.log('✅ REST API server closed');
