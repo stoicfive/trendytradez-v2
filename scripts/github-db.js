@@ -43,10 +43,44 @@ function initializeGitHubTables() {
         created_at TEXT DEFAULT CURRENT_TIMESTAMP
       );
 
+      CREATE TABLE IF NOT EXISTS github_projects (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        local_plan_id TEXT NOT NULL,
+        project_id TEXT NOT NULL,
+        project_number INTEGER NOT NULL,
+        project_url TEXT NOT NULL,
+        owner_id TEXT NOT NULL,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(local_plan_id)
+      );
+
+      CREATE TABLE IF NOT EXISTS github_project_fields (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        project_id TEXT NOT NULL,
+        field_id TEXT NOT NULL,
+        field_name TEXT NOT NULL,
+        field_type TEXT NOT NULL,
+        options TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+
+      CREATE TABLE IF NOT EXISTS github_project_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        project_id TEXT NOT NULL,
+        item_id TEXT NOT NULL,
+        issue_id INTEGER NOT NULL,
+        status TEXT NOT NULL,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(project_id, item_id)
+      );
+
       CREATE INDEX IF NOT EXISTS idx_mappings_local ON github_mappings(local_type, local_id);
       CREATE INDEX IF NOT EXISTS idx_mappings_github ON github_mappings(github_type, github_id);
       CREATE INDEX IF NOT EXISTS idx_sync_log_timestamp ON github_sync_log(timestamp);
       CREATE INDEX IF NOT EXISTS idx_webhooks_processed ON github_webhooks(processed);
+      CREATE INDEX IF NOT EXISTS idx_projects_plan ON github_projects(local_plan_id);
+      CREATE INDEX IF NOT EXISTS idx_project_items_issue ON github_project_items(issue_id);
     `);
 
     console.log('✅ GitHub tables initialized');

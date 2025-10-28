@@ -8,6 +8,17 @@ require('dotenv').config();
 const { getGitHubService } = require('./github-service');
 const { getState } = require('./state-manager');
 const { storeMapping, getGitHubId, logSync } = require('./github-db');
+const { 
+  createProject, 
+  addIssueToProject, 
+  getStatusField,
+  updateItemStatus,
+  storeProject, 
+  getStoredProject,
+  storeProjectItem,
+  mapStatusToGitHub,
+  getOwnerId 
+} = require('./github-projects');
 
 const SYNC_ENABLED = process.env.SYNC_ENABLED === 'true';
 const AUTO_CLOSE_ISSUES = process.env.AUTO_CLOSE_ISSUES === 'true';
@@ -122,7 +133,7 @@ async function createIssueFromTodo(todo) {
 }
 
 /**
- * Sync implementation plan to GitHub project
+ * Sync plan to tracking issue AND GitHub Project
  */
 async function syncPlanToProject(plan) {
   if (!SYNC_ENABLED) return;
@@ -130,27 +141,58 @@ async function syncPlanToProject(plan) {
   const github = getGitHubService();
   
   try {
-    // Check if already synced
+    // Check if issue already exists
     const existingMapping = getGitHubId('plan', plan.name);
+    let issue;
     
     if (existingMapping) {
       console.log(`Plan ${plan.name} already synced to project #${existingMapping.github_id}`);
+      issue = { number: existingMapping.github_id };
+    } else {
+      // Create tracking issue
+      issue = await github.createIssue({
+        title: `[Plan] ${plan.name}`,
+        body: `Implementation plan tracking issue\n\nProgress: ${plan.progress}%\nTasks: ${plan.completed}/${plan.total}`,
+        labels: ['plan', 'tracking'],
+      });
+
+      // Store mapping
+      storeMapping('plan', plan.name, 'issue', issue.number);
+      logSync('create', 'issue', issue.number, 'to_github', 'success');
+      console.log(`✅ Created tracking issue #${issue.number} for plan ${plan.name}`);
+    }
+
+    // Check if project already exists
+    const existingProject = getStoredProject(plan.name);
+    
+    if (existingProject) {
+      console.log(`Project already exists for plan ${plan.name} (#${existingProject.project_number})`);
       return;
     }
 
-    // Note: GitHub Projects v2 API is different, this creates an issue for tracking
-    const issue = await github.createIssue({
-      title: `[PLAN] ${plan.name}`,
-      body: `**Progress**: ${plan.progress}%\n**Completed**: ${plan.completed}/${plan.total} tasks\n\nTracking implementation plan: ${plan.file}`,
-      labels: ['plan', 'tracking'],
+    // Create GitHub Project
+    const projectName = `TrendyTradez v2 - ${plan.name}`;
+    const project = await createProject({
+      name: projectName,
+      description: `Auto-generated project for ${plan.name} implementation plan`,
     });
 
-    // Store mapping
-    storeMapping('plan', plan.name, 'issue', issue.number);
-    logSync('create', 'issue', issue.number, 'to_github', 'success');
+    // Store project mapping
+    const ownerId = await getOwnerId();
+    storeProject(plan.name, project.id, project.number, project.url, ownerId);
+    logSync('create', 'project', project.number, 'to_github', 'success');
 
-    console.log(`✅ Created tracking issue #${issue.number} for plan ${plan.name}`);
-    return issue;
+    // Get issue node ID for adding to project
+    const issueData = await github.getIssue(issue.number);
+    
+    // Add issue to project
+    const itemId = await addIssueToProject(project.id, issueData.node_id);
+    
+    // Store project item
+    storeProjectItem(project.id, itemId, issue.number, 'To Do');
+
+    console.log(`✅ Created project #${project.number} and added issue #${issue.number}`);
+    return { issue, project };
   } catch (error) {
     console.error(`Error syncing plan ${plan.name}:`, error.message);
     logSync('create', 'plan', plan.name, 'to_github', 'failed', error.message);
