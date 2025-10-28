@@ -10,9 +10,26 @@ interface HeaderProps {
 
 export function Header({ title, isConnected }: HeaderProps) {
   const [searchValue, setSearchValue] = useState('');
+  const [isSyncing, setIsSyncing] = useState(false);
 
   const handleSearch = (value: string) => {
     console.log('Search:', value);
+  };
+
+  const handleSync = async () => {
+    setIsSyncing(true);
+    try {
+      const response = await fetch('http://localhost:3001/api/sync', {
+        method: 'POST',
+      });
+      if (response.ok) {
+        console.log('Sync triggered successfully');
+      }
+    } catch (error) {
+      console.error('Sync failed:', error);
+    } finally {
+      setTimeout(() => setIsSyncing(false), 2000);
+    }
   };
 
   return (
@@ -44,6 +61,17 @@ export function Header({ title, isConnected }: HeaderProps) {
             onSubmit={handleSearch}
             className="w-64"
           />
+          <Button 
+            variant="secondary" 
+            size="sm"
+            onClick={handleSync}
+            disabled={isSyncing || !isConnected}
+          >
+            {isSyncing ? 'Syncing...' : 'Sync GitHub'}
+          </Button>
+          <Button variant="secondary" size="sm">
+            Settings
+          </Button>
           {isConnected && (
             <Badge variant="success" size="sm">
               Connected
