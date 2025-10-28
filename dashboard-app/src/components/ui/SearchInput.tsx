@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
-interface SearchInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+interface SearchInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onSubmit'> {
   onSubmit?: (value: string) => void;
 }
 
