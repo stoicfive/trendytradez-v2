@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { TabNavigation } from './components/layout/TabNavigation';
-import { CodeTab } from './components/tabs/CodeTab';
-import { IssuesTab } from './components/tabs/IssuesTab';
-import { PullRequestsTab } from './components/tabs/PullRequestsTab';
-import { ProjectsTab } from './components/tabs/ProjectsTab';
+import { StatsGrid } from './components/sections/StatsGrid';
 import { Card } from './components/cards/Card';
+import { PackageList } from './components/lists/PackageList';
+import { FileList } from './components/lists/FileList';
+import { PlanList } from './components/lists/PlanList';
+import { Button } from './components/ui/Button';
 import { useDashboardData } from './hooks/useDashboardData';
 
 const tabs = [
@@ -20,6 +21,16 @@ function App() {
   const [activeTab, setActiveTab] = useState('code');
   const { stats, packages, commits, plans, todos, github, isConnected, error } =
     useDashboardData();
+
+  const commitItems = useMemo(
+    () =>
+      commits.map((commit) => ({
+        id: commit.id || commit.hash,
+        name: commit.message,
+        description: `${commit.hash.substring(0, 7)} • ${commit.date}`,
+      })),
+    [commits]
+  );
 
   if (error) {
     return (
@@ -66,18 +77,101 @@ function App() {
 
         <main className="p-6 max-w-[1600px] mx-auto">
           {activeTab === 'code' && (
-            <CodeTab
-              stats={stats}
-              packages={packages}
-              commits={commits}
-              plans={plans}
-              todos={todos}
-              github={github}
-            />
-          )}
-          {activeTab === 'issues' && <IssuesTab issueCount={github?.issues} />}
-          {activeTab === 'pull-requests' && <PullRequestsTab />}
-          {activeTab === 'projects' && <ProjectsTab projectCount={github?.projects} />}
+            <>
+              <div className="mb-6">
+                <StatsGrid
+                  stats={stats}
+                  github={github}
+                  todosCount={todos.length}
+                  plansCount={plans.length}
+                />
+              </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div className="lg:col-span-2 space-y-6">
+              <Card title="Packages" padding="none">
+                <div className="p-6">
+                  <PackageList packages={packages} />
+                </div>
+              </Card>
+
+              <Card title="Recent Commits" padding="none">
+                <FileList items={commitItems} />
+              </Card>
+            </div>
+
+            <div className="space-y-6">
+              <Card title="About">
+                <p className="text-sm text-neutral-600 mb-4">
+                  This is a repository template created by TrendyTradez v2
+                </p>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="w-4 h-4 text-neutral-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                      />
+                    </svg>
+                    <a
+                      href="https://github.com/stoicfive/trendytradez-v2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary-600 hover:underline"
+                    >
+                      github.com/stoicfive/trendytradez-v2
+                    </a>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-neutral-200">
+                  <Button variant="primary" className="w-full">
+                    View on GitHub
+                  </Button>
+                </div>
+              </Card>
+
+              {github && (
+                <Card title="GitHub Integration">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-neutral-600">Projects</span>
+                      <span className="font-semibold text-neutral-900">{github.projects}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-neutral-600">Issues</span>
+                      <span className="font-semibold text-neutral-900">{github.issues}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-neutral-600">Milestones</span>
+                      <span className="font-semibold text-neutral-900">
+                        {github.milestones}
+                      </span>
+                    </div>
+                    {github.lastSync && (
+                      <div className="pt-3 border-t border-neutral-200">
+                        <p className="text-xs text-neutral-500">
+                          Last sync: {new Date(github.lastSync).toLocaleString()}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              )}
+            </div>
+          </div>
+
+          <Card title="Implementation Plans" padding="none">
+            <div className="p-6">
+              <PlanList plans={plans} />
+            </div>
+          </Card>
         </main>
       </div>
     </div>
