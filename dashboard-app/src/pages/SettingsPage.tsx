@@ -8,14 +8,14 @@ export function SettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">Settings</h1>
-        <p className="text-neutral-600 dark:text-neutral-400">Configure your dashboard preferences</p>
+        <h1 className="text-2xl font-bold text-primary mb-2">Settings</h1>
+        <p className="text-secondary">Configure your dashboard preferences</p>
       </div>
 
       <Card title="General Settings">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+            <label className="block text-sm font-medium text-secondary mb-2">
               Dashboard Theme
             </label>
             <select 
@@ -30,7 +30,7 @@ export function SettingsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+            <label className="block text-sm font-medium text-secondary mb-2">
               Refresh Interval
             </label>
             <select className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100">
@@ -46,7 +46,7 @@ export function SettingsPage() {
       <Card title="GitHub Integration">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+            <label className="block text-sm font-medium text-secondary mb-2">
               Repository
             </label>
             <input
@@ -58,7 +58,7 @@ export function SettingsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+            <label className="block text-sm font-medium text-secondary mb-2">
               Access Token
             </label>
             <input
@@ -76,15 +76,15 @@ export function SettingsPage() {
         <div className="space-y-3">
           <label className="flex items-center gap-3">
             <input type="checkbox" className="w-4 h-4" defaultChecked />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">Email notifications for failed builds</span>
+            <span className="text-sm text-secondary">Email notifications for failed builds</span>
           </label>
           <label className="flex items-center gap-3">
             <input type="checkbox" className="w-4 h-4" defaultChecked />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">Desktop notifications for new issues</span>
+            <span className="text-sm text-secondary">Desktop notifications for new issues</span>
           </label>
           <label className="flex items-center gap-3">
             <input type="checkbox" className="w-4 h-4" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">Weekly summary emails</span>
+            <span className="text-sm text-secondary">Weekly summary emails</span>
           </label>
         </div>
       </Card>

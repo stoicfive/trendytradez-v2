@@ -15,7 +15,7 @@ export function UpNextCard({ plans }: UpNextCardProps) {
   if (activePlans.length === 0) {
     return (
       <Card title="Up Next">
-        <div className="text-center py-8 text-neutral-500 dark:text-neutral-400">
+        <div className="text-center py-8 text-secondary">
           <p>All plans completed!</p>
           <p className="text-sm mt-2">Great work on finishing everything.</p>
         </div>
@@ -32,10 +32,10 @@ export function UpNextCard({ plans }: UpNextCardProps) {
             className="flex items-center justify-between p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
           >
             <div className="flex-1">
-              <h4 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+              <h4 className="text-sm font-medium text-primary">
                 {plan.name}
               </h4>
-              <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
+              <p className="text-xs text-secondary mt-1">
                 {plan.completed} of {plan.total} tasks complete
               </p>
             </div>

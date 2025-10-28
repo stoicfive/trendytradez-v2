@@ -64,7 +64,7 @@ export function CodeTab({ stats, packages, commits, plans, todos, github }: Code
 
         <div className="space-y-6">
           <Card title="About">
-            <p className="text-sm text-neutral-600 mb-4">
+            <p className="text-sm text-secondary mb-4">
               This is a repository template created by TrendyTradez v2
             </p>
             <div className="space-y-2 text-sm">
@@ -103,20 +103,20 @@ export function CodeTab({ stats, packages, commits, plans, todos, github }: Code
             <Card title="GitHub Integration">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-neutral-600">Projects</span>
-                  <span className="font-semibold text-neutral-900">{github.projects}</span>
+                  <span className="text-sm text-secondary">Projects</span>
+                  <span className="font-semibold text-primary">{github.projects}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-neutral-600">Issues</span>
-                  <span className="font-semibold text-neutral-900">{github.issues}</span>
+                  <span className="text-sm text-secondary">Issues</span>
+                  <span className="font-semibold text-primary">{github.issues}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-neutral-600">Milestones</span>
-                  <span className="font-semibold text-neutral-900">{github.milestones}</span>
+                  <span className="text-sm text-secondary">Milestones</span>
+                  <span className="font-semibold text-primary">{github.milestones}</span>
                 </div>
                 {github.lastSync && (
                   <div className="pt-3 border-t border-neutral-200">
-                    <p className="text-xs text-neutral-500">
+                    <p className="text-xs text-tertiary">
                       Last sync: {new Date(github.lastSync).toLocaleString()}
                     </p>
                   </div>

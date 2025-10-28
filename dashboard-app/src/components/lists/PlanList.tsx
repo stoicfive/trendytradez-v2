@@ -14,13 +14,13 @@ export const PlanList = memo(function PlanList({ plans }: PlanListProps) {
           className="p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg bg-neutral-50 dark:bg-neutral-800/50"
         >
           <div className="flex items-center justify-between mb-3">
-            <h4 className="font-medium text-neutral-900 dark:text-neutral-100">{plan.name}</h4>
+            <h4 className="font-medium text-primary">{plan.name}</h4>
             <span className="text-sm font-semibold text-primary-600 dark:text-primary-400">{plan.progress}%</span>
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-neutral-600 dark:text-neutral-400">Progress</span>
-              <span className="text-neutral-900 dark:text-neutral-100">
+              <span className="text-secondary">Progress</span>
+              <span className="text-primary">
                 {plan.completed} / {plan.total} tasks
               </span>
             </div>

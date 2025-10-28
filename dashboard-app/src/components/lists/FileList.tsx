@@ -25,9 +25,9 @@ export const FileList = memo(function FileList({ items, onItemClick }: FileListP
             <div className="flex-shrink-0 text-neutral-400 mt-0.5">{item.icon}</div>
           )}
           <div className="flex-1">
-            <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">{item.name}</p>
+            <p className="text-sm font-medium text-primary">{item.name}</p>
             {item.description && (
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{item.description}</p>
+              <p className="text-xs text-tertiary mt-0.5">{item.description}</p>
             )}
           </div>
           {item.meta && (

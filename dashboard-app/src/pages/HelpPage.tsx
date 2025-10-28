@@ -4,14 +4,14 @@ export function HelpPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-900 mb-2">Help & Documentation</h1>
-        <p className="text-neutral-600">Get help with using the dashboard</p>
+        <h1 className="text-2xl font-bold text-primary mb-2">Help & Documentation</h1>
+        <p className="text-secondary">Get help with using the dashboard</p>
       </div>
 
       <Card title="Quick Start Guide">
         <div className="prose prose-sm max-w-none">
-          <h3 className="text-lg font-semibold text-neutral-900 mb-3">Getting Started</h3>
-          <ol className="space-y-2 text-neutral-700">
+          <h3 className="text-lg font-semibold text-primary mb-3">Getting Started</h3>
+          <ol className="space-y-2 text-secondary">
             <li>Connect your GitHub repository in Settings</li>
             <li>Configure your project structure and plans</li>
             <li>Monitor real-time updates on the Code tab</li>
@@ -79,7 +79,7 @@ export function HelpPage() {
 
       <Card title="Support">
         <div className="text-center py-8">
-          <p className="text-neutral-700 mb-4">Need additional help?</p>
+          <p className="text-secondary mb-4">Need additional help?</p>
           <a
             href="https://github.com/stoicfive/trendytradez-v2/issues"
             target="_blank"
