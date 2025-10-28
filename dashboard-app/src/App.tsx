@@ -22,6 +22,16 @@ function App() {
   const { stats, packages, commits, plans, todos, github, isConnected, error } =
     useDashboardData();
 
+  const commitItems = useMemo(
+    () =>
+      commits.map((commit) => ({
+        id: commit.id || commit.hash,
+        name: commit.message,
+        description: `${commit.hash.substring(0, 7)} • ${commit.date}`,
+      })),
+    [commits]
+  );
+
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-50">
@@ -52,16 +62,6 @@ function App() {
       </div>
     );
   }
-
-  const commitItems = useMemo(
-    () =>
-      commits.map((commit, index) => ({
-        id: commit.id || commit.hash,
-        name: commit.message,
-        description: `${commit.hash.substring(0, 7)} • ${commit.date}`,
-      })),
-    [commits]
-  );
 
   return (
     <div className="min-h-screen bg-neutral-50">
