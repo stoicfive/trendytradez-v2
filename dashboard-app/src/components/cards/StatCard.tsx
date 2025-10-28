@@ -25,7 +25,6 @@ export function StatCard({ label, value, icon, trend, color = 'primary' }: StatC
         <div className="flex-1">
           <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2">{label}</p>
           <p className={clsx('text-3xl font-bold', colorClasses[color])}>{value}</p>
-          </p>
           {trend && (
             <div className="flex items-center gap-1 mt-2">
               <span

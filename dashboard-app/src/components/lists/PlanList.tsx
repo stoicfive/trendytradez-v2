@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { ProgressBar } from '../ui/ProgressBar';
 import type { Plan } from '../../types/dashboard';
 
 interface PlanListProps {

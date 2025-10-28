@@ -7,6 +7,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
 }
 
+const variantClasses = {
+  primary: 'bg-primary-600 text-white hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 focus-visible:ring-primary-600',
+  secondary: 'bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-600 focus-visible:ring-neutral-600',
+  ghost: 'hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 focus-visible:ring-neutral-600',
+  danger: 'bg-error text-white hover:bg-red-600 focus-visible:ring-error',
+};
+
 export function Button({
   children,
   variant = 'primary',
