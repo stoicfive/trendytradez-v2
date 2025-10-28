@@ -12,7 +12,7 @@ import { useDashboardData } from './hooks/useDashboardData';
 
 const tabs = [
   { id: 'code', label: 'Code' },
-  { id: 'issues', label: 'Issues', count: 12 },
+  { id: 'issues', label: 'Issues', count: 103 },
   { id: 'pull-requests', label: 'Pull Requests', count: 7 },
   { id: 'projects', label: 'Projects' },
 ];
@@ -76,14 +76,16 @@ function App() {
         <TabNavigation tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
         <main className="p-6 max-w-[1600px] mx-auto">
-          <div className="mb-6">
-            <StatsGrid
-              stats={stats}
-              github={github}
-              todosCount={todos.length}
-              plansCount={plans.length}
-            />
-          </div>
+          {activeTab === 'code' && (
+            <>
+              <div className="mb-6">
+                <StatsGrid
+                  stats={stats}
+                  github={github}
+                  todosCount={todos.length}
+                  plansCount={plans.length}
+                />
+              </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             <div className="lg:col-span-2 space-y-6">
