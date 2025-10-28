@@ -53,9 +53,13 @@ function App() {
       <div className="min-h-screen flex items-center justify-center bg-neutral-50">
         <Card className="max-w-md">
           <div className="text-center">
+            <div className="animate-spin w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full mx-auto mb-4"></div>
             <h1 className="text-xl font-semibold text-neutral-900 mb-2">Connecting...</h1>
-            <p className="text-neutral-600">
+            <p className="text-neutral-600 mb-4">
               Connecting to dashboard server at ws://localhost:3002
+            </p>
+            <p className="text-xs text-neutral-500">
+              Check browser console (F12) for connection errors
             </p>
           </div>
         </Card>
