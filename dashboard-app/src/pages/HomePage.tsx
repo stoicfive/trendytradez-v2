@@ -1,5 +1,6 @@
 import { Card } from '../components/cards/Card';
 import { StatsGrid } from '../components/sections/StatsGrid';
+import { UpNextCard } from '../components/cards/UpNextCard';
 import type { DashboardData } from '../types/dashboard';
 
 interface HomePageProps {
@@ -70,6 +71,8 @@ export function HomePage({ data }: HomePageProps) {
           </div>
         </Card>
       </div>
+
+      <UpNextCard plans={plans} />
     </div>
   );
 }

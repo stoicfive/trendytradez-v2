@@ -4,6 +4,7 @@ import { Card } from '../cards/Card';
 import { PackageList } from '../lists/PackageList';
 import { FileList } from '../lists/FileList';
 import { PlanList } from '../lists/PlanList';
+import { UpNextCard } from '../cards/UpNextCard';
 import { Button } from '../ui/Button';
 import type { Package, Commit, Plan, Todo } from '../../types/dashboard';
 
@@ -126,11 +127,19 @@ export function CodeTab({ stats, packages, commits, plans, todos, github }: Code
         </div>
       </div>
 
-      <Card title="Implementation Plans" padding="none">
-        <div className="p-6">
-          <PlanList plans={plans} />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <Card title="Implementation Plans" padding="none">
+            <div className="p-6">
+              <PlanList plans={plans} />
+            </div>
+          </Card>
         </div>
-      </Card>
+
+        <div>
+          <UpNextCard plans={plans} />
+        </div>
+      </div>
     </>
   );
 }
