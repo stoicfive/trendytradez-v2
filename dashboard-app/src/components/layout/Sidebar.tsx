@@ -10,6 +10,7 @@ interface NavItem {
 
 interface SidebarProps {
   activeItem?: string;
+  onItemClick?: (itemId: string) => void;
 }
 
 const navItems: NavItem[] = [
@@ -23,7 +24,7 @@ const bottomItems: NavItem[] = [
   { id: 'help', label: 'Help', icon: <HelpIcon /> },
 ];
 
-export function Sidebar({ activeItem = 'home' }: SidebarProps) {
+export function Sidebar({ activeItem = 'home', onItemClick }: SidebarProps) {
   return (
     <aside className="fixed left-0 top-0 h-screen w-16 bg-primary-600 flex flex-col items-center py-4 z-50">
       <SidebarLogo />
@@ -35,6 +36,7 @@ export function Sidebar({ activeItem = 'home' }: SidebarProps) {
             icon={item.icon}
             label={item.label}
             isActive={activeItem === item.id}
+            onClick={() => onItemClick?.(item.id)}
           />
         ))}
       </nav>
@@ -45,6 +47,7 @@ export function Sidebar({ activeItem = 'home' }: SidebarProps) {
             key={item.id}
             icon={item.icon}
             label={item.label}
+            onClick={() => onItemClick?.(item.id)}
           />
         ))}
       </div>

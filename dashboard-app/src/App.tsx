@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-neutral-50">
-      <Sidebar activeItem="home" />
+      <Sidebar activeItem="home" onItemClick={(id) => console.log('Sidebar clicked:', id)} />
 
       <div className="ml-16">
         <Header title="TrendyTradez v2" isConnected={isConnected} />
