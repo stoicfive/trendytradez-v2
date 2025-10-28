@@ -208,28 +208,67 @@ class GitHubService {
       console.log(`✅ Added labels to issue #${issueNumber}`);
     } catch (error) {
       console.error(`Error adding labels to issue #${issueNumber}:`, error.message);
-      throw error;
-    }
   }
+}
 
-  /**
-   * Create or update issue comment
-   */
-  async createComment(issueNumber, body) {
-    try {
-      const { data } = await this.octokit.issues.createComment({
-        owner: this.owner,
-        repo: this.repo,
-        issue_number: issueNumber,
-        body,
-      });
+/**
+ * Add label to issue
+ */
+async addLabels(issueNumber, labels) {
+  try {
+    await this.octokit.issues.addLabels({
+      owner: this.owner,
+      repo: this.repo,
+      issue_number: issueNumber,
+      labels,
+    });
 
-      return data;
-    } catch (error) {
-      console.error(`Error creating comment on issue #${issueNumber}:`, error.message);
-      throw error;
-    }
+    console.log(`✅ Added labels to issue #${issueNumber}`);
+  } catch (error) {
+    console.error(`Error adding labels to issue #${issueNumber}:`, error.message);
+    throw error;
   }
+}
+
+/**
+ * Create or update issue comment
+ */
+async createComment(issueNumber, body) {
+  try {
+    const { data } = await this.octokit.issues.createComment({
+      owner: this.owner,
+      repo: this.repo,
+      issue_number: issueNumber,
+      body,
+    });
+
+    return data;
+  } catch (error) {
+    console.error(`Error creating comment on issue #${issueNumber}:`, error.message);
+    throw error;
+  }
+}
+
+/**
+ * Get issue (with node_id for Projects API)
+ * 
+ * Note: The response includes the node_id which can be used with the Projects API.
+ */
+async getIssue(issueNumber) {
+  try {
+    const { data } = await this.octokit.issues.get({
+      owner: this.owner,
+      repo: this.repo,
+      issue_number: issueNumber,
+    });
+
+    return data;
+  } catch (error) {
+    console.error(`Error getting issue #${issueNumber}:`, error.message);
+    throw error;
+  }
+}
+
 }
 
 // Singleton instance
