@@ -25,7 +25,7 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
               'flex items-center gap-2 py-3 border-b-2 transition-colors',
               activeTab === tab.id
                 ? 'border-primary-600 dark:border-primary-500 text-primary-600 dark:text-primary-400'
-                : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:border-neutral-300 dark:hover:border-neutral-600'
+                : 'border-transparent text-secondary hover:text-primary hover:border-neutral-300 dark:hover:border-neutral-600'
             )}
           >
             <span className="text-sm">{tab.label}</span>

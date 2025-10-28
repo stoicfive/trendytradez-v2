@@ -13,8 +13,8 @@ export function HomePage({ data }: HomePageProps) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-900 mb-2">Dashboard Overview</h1>
-        <p className="text-neutral-600">Welcome to TrendyTradez v2 Project Dashboard</p>
+        <h1 className="text-2xl font-bold text-primary mb-2">Dashboard Overview</h1>
+        <p className="text-secondary">Welcome to TrendyTradez v2 Project Dashboard</p>
       </div>
 
       <StatsGrid

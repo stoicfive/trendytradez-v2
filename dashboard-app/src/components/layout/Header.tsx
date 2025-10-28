@@ -56,17 +56,17 @@ export function Header({ title, isConnected }: HeaderProps) {
         <div className="flex items-center gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">{title}</h1>
+              <h1 className="text-xl font-semibold text-primary">{title}</h1>
               <Badge variant="default" size="sm">
                 v4.2 Beta
               </Badge>
             </div>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Figma</span>
-              <span className="text-neutral-300 dark:text-neutral-600">/</span>
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Projects</span>
-              <span className="text-neutral-300 dark:text-neutral-600">/</span>
-              <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100">Public Repo</span>
+              <span className="text-sm text-secondary">Figma</span>
+              <span className="text-tertiary">/</span>
+              <span className="text-sm text-secondary">Projects</span>
+              <span className="text-tertiary">/</span>
+              <span className="text-sm font-medium text-primary">Public Repo</span>
             </div>
           </div>
         </div>

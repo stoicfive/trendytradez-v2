@@ -27,29 +27,29 @@ export function AnalyticsPage({ data }: AnalyticsPageProps) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-900 mb-2">Analytics</h1>
-        <p className="text-neutral-600">Project metrics and insights</p>
+        <h1 className="text-2xl font-bold text-primary mb-2">Analytics</h1>
+        <p className="text-secondary">Project metrics and insights</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card title="Code Activity">
           <div className="text-center py-8">
             <p className="text-4xl font-bold text-primary-600 mb-2">{totalCommits}</p>
-            <p className="text-sm text-neutral-600">Total commits tracked</p>
+            <p className="text-sm text-secondary">Total commits tracked</p>
           </div>
         </Card>
 
         <Card title="Completion Rate">
           <div className="text-center py-8">
             <p className="text-4xl font-bold text-success mb-2">{completionRate}%</p>
-            <p className="text-sm text-neutral-600">Packages complete</p>
+            <p className="text-sm text-secondary">Packages complete</p>
           </div>
         </Card>
 
         <Card title="Code Quality">
           <div className="text-center py-8">
             <p className="text-4xl font-bold text-warning mb-2">{getQualityGrade()}</p>
-            <p className="text-sm text-neutral-600">Overall grade</p>
+            <p className="text-sm text-secondary">Overall grade</p>
           </div>
         </Card>
       </div>
