@@ -8,6 +8,7 @@ const { startWatcher } = require('./watcher');
 const { analyzeProject } = require('./analyzer');
 const { updateState, getState } = require('./state-manager');
 const { broadcastUpdate } = require('./server');
+const { syncGitHubStatus } = require('./sync-github-status');
 
 let isAnalyzing = false;
 
@@ -28,6 +29,9 @@ async function runAnalysis() {
     
     console.log('💾 Updating state...');
     updateState(analysis);
+    
+    console.log('🔄 Syncing GitHub status...');
+    await syncGitHubStatus();
     
     console.log('✅ Dashboard updated\n');
     
