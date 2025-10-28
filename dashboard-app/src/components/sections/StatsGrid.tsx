@@ -12,11 +12,12 @@ export function StatsGrid({ stats, github, todosCount, plansCount }: StatsGridPr
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
       <StatCard
-        label="Packages Complete"
+        label={<p className="text-sm text-secondary mb-1">Packages Complete</p>}
         value={`${stats.completePackages}/${stats.totalPackages}`}
         color="primary"
       />
       <StatCard
+        label={<p className="text-sm text-secondary mb-1">Test Coverage</p>}
         label="Test Coverage"
         value={`${stats.testCoverage}%`}
         color="success"
