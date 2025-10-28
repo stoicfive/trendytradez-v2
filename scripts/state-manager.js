@@ -183,14 +183,23 @@ function getState() {
 
   try {
     const packages = db.prepare('SELECT * FROM packages ORDER BY name').all();
-    const commits = db.prepare('SELECT * FROM commits ORDER BY created_at DESC LIMIT 10').all();
+    const commits = db.prepare('SELECT * FROM commits ORDER BY date DESC LIMIT 10').all();
     const todos = db.prepare('SELECT * FROM todos ORDER BY file, line').all();
     const plans = db.prepare('SELECT * FROM plans ORDER BY name').all();
-    const meta = db.prepare('SELECT * FROM project_meta').all();
+    const meta = db.prepare('SELECT key, value FROM project_meta').all();
 
+    const stats = getStats();
+
+    // Get GitHub stats
+    const githubProjects = db.prepare('SELECT COUNT(*) as count FROM github_projects').get();
+    const githubMappings = db.prepare('SELECT COUNT(*) as count FROM github_mappings WHERE github_type = "issue"').get();
+    const githubMilestones = db.prepare('SELECT COUNT(*) as count FROM github_mappings WHERE github_type = "milestone"').get();
+    const lastSync = db.prepare('SELECT MAX(timestamp) as last FROM github_sync_log WHERE status = "success"').get();
+
+    // Convert meta array to object
     const metaObj = {};
-    meta.forEach((m) => {
-      metaObj[m.key] = m.value;
+    meta.forEach(({ key, value }) => {
+      metaObj[key] = value;
     });
 
     return {
@@ -198,12 +207,16 @@ function getState() {
       commits,
       todos,
       plans,
+      stats,
       meta: metaObj,
-      stats: {
-        totalPackages: parseInt(metaObj.total_packages || '0'),
-        completePackages: parseInt(metaObj.complete_packages || '0'),
-        testCoverage: parseInt(metaObj.test_coverage || '0'),
+      github: {
+        projects: githubProjects?.count || 0,
+        issues: githubMappings?.count || 0,
+        milestones: githubMilestones?.count || 0,
+        lastSync: lastSync?.last || null,
+        syncStatus: lastSync?.last ? 'success' : null
       },
+      lastUpdated: new Date().toISOString()
     };
   } finally {
     db.close();
