@@ -82,7 +82,7 @@ function App() {
       case 'home':
         return <HomePage data={dashboardData} />;
       case 'analytics':
-        return <AnalyticsPage />;
+        return <AnalyticsPage data={dashboardData} />;
       case 'settings':
         return <SettingsPage />;
       case 'help':
