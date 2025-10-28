@@ -23,12 +23,12 @@ export function Header({ title, isConnected }: HeaderProps) {
         method: 'POST',
       });
       if (response.ok) {
-        console.log('Sync triggered successfully');
+        console.log('Sync completed - dashboard updated');
       }
     } catch (error) {
       console.error('Sync failed:', error);
     } finally {
-      setTimeout(() => setIsSyncing(false), 2000);
+      setTimeout(() => setIsSyncing(false), 1500);
     }
   };
 
