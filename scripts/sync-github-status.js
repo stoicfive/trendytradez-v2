@@ -39,14 +39,20 @@ async function syncGitHubStatus() {
       let completed = 0;
       const total = tasks.length;
       
-      // Count tasks with "Done" status in GitHub Projects
+      // Count tasks that are in progress or done
+      let inProgress = 0;
       for (const task of tasks) {
         if (task.status === 'Done') {
           completed++;
+        } else if (task.status === 'In Progress') {
+          inProgress++;
         }
       }
       
-      const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
+      // Progress includes both in-progress and completed tasks
+      const totalProgress = completed + inProgress;
+      
+      const progress = total > 0 ? Math.round((totalProgress / total) * 100) : 0;
       
       // Update plan in database
       db.prepare(`
@@ -55,7 +61,7 @@ async function syncGitHubStatus() {
         WHERE name = ?
       `).run(progress, completed, total, plan_name);
       
-      console.log(`${plan_name}: ${completed}/${total} tasks (${progress}%)`);
+      console.log(`${plan_name}: ${completed} done, ${inProgress} in progress, ${total - totalProgress} to do (${progress}%)`);
     }
     
     console.log('\nSync complete!');
