@@ -11,6 +11,7 @@ interface HeaderProps {
 export function Header({ title, isConnected }: HeaderProps) {
   const [searchValue, setSearchValue] = useState('');
   const [isSyncing, setIsSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const handleSearch = (value: string) => {
     console.log('Search:', value);
@@ -18,17 +19,34 @@ export function Header({ title, isConnected }: HeaderProps) {
 
   const handleSync = async () => {
     setIsSyncing(true);
+    setSyncMessage(null);
+    
     try {
       const response = await fetch('http://localhost:3001/api/sync', {
         method: 'POST',
       });
+      
+      const data = await response.json();
+      
       if (response.ok) {
-        console.log('Sync completed - dashboard updated');
+        setSyncMessage({ 
+          type: 'success', 
+          text: data.message || 'All changes are up to date' 
+        });
+      } else {
+        setSyncMessage({ 
+          type: 'error', 
+          text: data.error || 'Sync failed' 
+        });
       }
     } catch (error) {
-      console.error('Sync failed:', error);
+      setSyncMessage({ 
+        type: 'error', 
+        text: error instanceof Error ? error.message : 'Network error - could not reach server' 
+      });
     } finally {
-      setTimeout(() => setIsSyncing(false), 1500);
+      setIsSyncing(false);
+      setTimeout(() => setSyncMessage(null), 5000);
     }
   };
 
@@ -61,14 +79,23 @@ export function Header({ title, isConnected }: HeaderProps) {
             onSubmit={handleSearch}
             className="w-64"
           />
-          <Button 
-            variant="secondary" 
-            size="sm"
-            onClick={handleSync}
-            disabled={isSyncing || !isConnected}
-          >
-            {isSyncing ? 'Syncing...' : 'Sync GitHub'}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="secondary" 
+              size="sm"
+              onClick={handleSync}
+              disabled={isSyncing || !isConnected}
+            >
+              {isSyncing ? 'Syncing...' : 'Sync GitHub'}
+            </Button>
+            {syncMessage && (
+              <span className={`text-sm ${
+                syncMessage.type === 'success' ? 'text-success' : 'text-error'
+              }`}>
+                {syncMessage.text}
+              </span>
+            )}
+          </div>
           <Button variant="secondary" size="sm">
             Settings
           </Button>

@@ -79,6 +79,7 @@ app.get('/api/plans', (req, res) => {
 
 app.post('/api/sync', async (req, res) => {
   try {
+    console.log('Starting GitHub sync...');
     const { refreshProjectStatus } = require('./refresh-project-status');
     const { syncGitHubStatus } = require('./sync-github-status');
     
@@ -88,9 +89,14 @@ app.post('/api/sync', async (req, res) => {
     const state = getState();
     broadcast(JSON.stringify({ type: 'update', data: state }));
     
-    res.json({ success: true, message: 'Sync completed' });
+    console.log('Sync completed successfully');
+    res.json({ success: true, message: 'All changes are up to date' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Sync failed:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: `Sync failed: ${error.message}` 
+    });
   }
 });
 
