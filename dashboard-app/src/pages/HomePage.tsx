@@ -28,19 +28,19 @@ export function HomePage({ data }: HomePageProps) {
         <Card title="Quick Stats">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Total Packages</span>
-              <span className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+              <span className="text-sm text-secondary">Total Packages</span>
+              <span className="text-lg font-semibold text-primary">
                 {stats.totalPackages}
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Test Coverage</span>
-              <span className="text-lg font-semibold text-success dark:text-green-400">
+              <span className="text-sm text-secondary">Test Coverage</span>
+              <span className="text-lg font-semibold text-success">
                 {stats.testCoverage}%
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Active Plans</span>
+              <span className="text-sm text-secondary">Active Plans</span>
               <span className="text-lg font-semibold text-primary-600 dark:text-primary-400">
                 {plans.length}
               </span>
@@ -51,20 +51,20 @@ export function HomePage({ data }: HomePageProps) {
         <Card title="Project Health">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">GitHub Issues</span>
-              <span className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+              <span className="text-sm text-secondary">GitHub Issues</span>
+              <span className="text-lg font-semibold text-primary">
                 {github?.issues || 0}
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Projects</span>
-              <span className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+              <span className="text-sm text-secondary">Projects</span>
+              <span className="text-lg font-semibold text-primary">
                 {github?.projects || 0}
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Completion</span>
-              <span className="text-lg font-semibold text-success dark:text-green-400">
+              <span className="text-sm text-secondary">Completion</span>
+              <span className="text-lg font-semibold text-success">
                 {Math.round((stats.completePackages / stats.totalPackages) * 100)}%
               </span>
             </div>
