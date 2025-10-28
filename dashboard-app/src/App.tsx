@@ -77,7 +77,7 @@ function App() {
             📦 Repository
           </a>
           <a 
-            href="https://github.com/stoicfive/projects" 
+            href="https://github.com/stoicfive?tab=projects" 
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -333,7 +333,7 @@ function App() {
                 View Issues →
               </a>
               <a 
-                href="https://github.com/stoicfive/projects"
+                href="https://github.com/stoicfive?tab=projects"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
