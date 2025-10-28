@@ -7,10 +7,18 @@ interface PlanListProps {
 
 export const PlanList = memo(function PlanList({ plans }: PlanListProps) {
   const getGitHubProjectUrl = (planName: string) => {
+    // Extract leading digits from plan name
     const projectNumber = planName.match(/^\d+/)?.[0];
     if (projectNumber) {
       return `https://github.com/stoicfive/trendytradez-v2/projects/${projectNumber}`;
     }
+    
+    // For plans without leading numbers, try to find any digits
+    const anyNumber = planName.match(/\d+/)?.[0];
+    if (anyNumber) {
+      return `https://github.com/stoicfive/trendytradez-v2/projects/${anyNumber}`;
+    }
+    
     return null;
   };
 
