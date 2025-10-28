@@ -82,12 +82,13 @@ app.post('/api/sync', async (req, res) => {
     console.log('Starting GitHub sync...');
     const { refreshProjectStatus } = require('./refresh-project-status');
     const { syncGitHubStatus } = require('./sync-github-status');
+    const { broadcastUpdate } = require('./server');
     
     await refreshProjectStatus();
     await syncGitHubStatus();
     
     const state = getState();
-    broadcast(JSON.stringify({ type: 'update', data: state }));
+    broadcastUpdate(state);
     
     console.log('Sync completed successfully');
     res.json({ success: true, message: 'All changes are up to date' });
